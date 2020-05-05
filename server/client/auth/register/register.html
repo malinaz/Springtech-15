@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/shared/shared.css">
+    <link rel="stylesheet" href="/auth/register/register.css">
+    <script src="/auth/register/register.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="register-box">
+            <h1 class="box-title">REGISTER</h1>
+            <form class="register-form">
+                <input type="text" id="fullName" class="form-input" placeholder="Full Name" autocomplete="off">
+                <input type="text" id="username" class="form-input" placeholder="Username" autocomplete="off">
+                <input type="password" id="password" class="form-input" placeholder="Password">
+                <input type="email" id="email" class="form-input" placeholder="Email Address" autocomplete="off">
+                <select id="gender" class="form-input">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </form>
+            <div class="register-btn">REGISTER</div>
+            <p class="login-text">Already have an account ? <a href="/login" class="login-link">Login</a></p>
+        </div>
+    </div>
+</body>
+</html>
