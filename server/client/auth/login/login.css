@@ -19,15 +19,17 @@ body, html {
 	flex-direction: column;
 
 	background-color: #4fb3be;
-	border-radius: 5px;
-	box-shadow: 7px 7px 5px #696969;
+	border-radius: 3px;
+	box-shadow: 5px 5px 5px #00363a;
 }
 
 .login-container > h3 {
 	margin: auto;
 	margin-bottom: 10px;
-	font-size: 30px;
-	font-weight: bolder;
+	font-size: 2rem;
+	font-weight: 700;
+	cursor: default;
+	color: #00363a;
 }
 
 .login-container > p {
@@ -39,25 +41,38 @@ body, html {
 	color: #005661;
 }
 
+.login-container > p > a:active {
+	color: white;
+}
+
 .login-container > input {
 	padding: 5px;
-	margin: 15px auto auto auto;
-	width: 60%;
+	margin: 10px auto auto auto;
+	width: 300px;
 
-	border-radius: 5px;
+	border-radius: 3px;
 	border: none;
-	box-shadow: 3px 3px 2px #696969;
+	box-shadow: 3px 3px 3px #006064;
 }
 
 .login-container > button {
 	width: 100px;
 	margin: 20px auto;
-	padding: 10px;
+	padding: 10px 20px;
 
 	background-color: #005661;
 	color: white;
 	font-size: 15px;
 	font-weight: bold;
-	border-radius: 5px;
+	border-radius: 3px;
 	border: none;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
 }
+
+.login-container > button:hover{
+	transform: scale(1.05);
+	background-color: #00363a;
+
+}
+

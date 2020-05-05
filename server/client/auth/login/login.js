@@ -1,3 +1,5 @@
+const SERVER_URL = 'http://localhost:3000';
+
 function renderLogInPage() {
 	const container_div = $("#container");
 	container_div.empty();
@@ -17,9 +19,39 @@ function renderLogInPage() {
 	logInContainer_div.append(login_toRegister_a);
 
 	logIn_button.click( () => {
-		//log in function
+		const username = logInUsername_input.val();
+		const password = logInPassword_input.val();
+
+		if(username === '' || password === '') {
+			alert('All fields must be completed!');
+			return;
+		}
+
+		tryLogIn(username, password, (user) => {
+			if(user) {
+				localStorage.setItem('userId', user._id);
+				window.location.href='/feed';
+			} else {
+				alert('Invalid username or password !')
+			}
+		})
 	})
 
+}
+
+function tryLogIn(username, password, callback) {
+	$.ajax({
+		url: `${SERVER_URL}/api/user/${username}/${password}`,
+		type: 'GET',
+		dataType: 'json',
+		contentType: "application/json; charset=utf-8",
+		success: function (response) {
+			callback(response);
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
 }
 
 function init() {
