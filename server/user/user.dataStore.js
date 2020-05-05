@@ -9,6 +9,17 @@ const userDatastore = {
         .catch(error => {
             fail(error);
         })
+    },
+
+    findByUserNameAndPassword: (username, password, success, fail) => {
+        User.findOne({
+            username: username,
+            password: password,
+        }).then((data) => {
+            success(data);
+        }).catch((error) => {
+            fail(error);
+        });
     }
 }
 

@@ -30,6 +30,10 @@ router.get('/register', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/auth/register/register.html'));
 });
 
+router.get('/login', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/auth/login/login.html'));
+});
+
 function initRouters() {
     app.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*");
