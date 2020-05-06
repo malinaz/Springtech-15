@@ -123,14 +123,14 @@ button {
   background-color: #ffffff;
   opacity: 0.7;
 }
-.container .update-popup .update-div,
-.container .delete-popup .delete-div {
+.container  .update-div,
+.container  .delete-div {
   background-color: #00838e;
   opacity: 1;
   color: white;
   border-radius: 10px;
   height: 150px;
-  width: 270px;
+  width:270px;
   font-size: 20px;
   font-weight: bold;
   position: fixed;
@@ -139,12 +139,16 @@ button {
   transform: translate(-50%, -50%);
   top: 50%;
 }
-.container .update-popup .update-div p,
-.container .delete-popup .delete-div p {
+.container  .update-div input{
+  width: 75%;
+}
+
+.container  .update-div p,
+.container  .delete-div p {
   padding: 0 5px;
 }
-.container .update-popup .update-div button,
-.container .delete-popup .delete-div button {
+.container  .update-div button,
+.container .delete-div button {
   background-color: #ffffff;
   color: #00838e;
   margin: 10px 10px 0 0;
