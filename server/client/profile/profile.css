@@ -1,18 +1,11 @@
-body,
 h,
 p {
     margin: 0px;
     padding: 0px;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-}
-
 .profile-main {
     height: 100%;
-    width: 100%;
     display: flex;
     justify-content: center;
     background-color: rgb(231, 227, 227);
@@ -32,7 +25,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 3fr;
     /*grid-column-gap: 30px; */
-    box-shadow: 6px 5px 9px -5px rgba(138, 134, 138, 1);
+    box-shadow: 6px 5px 9px -5px #8a868a;
 }
 
 .profile-posts-section {
@@ -40,7 +33,7 @@ body {
     grid-row: 2;
     margin-bottom: 10px;
     background-color: white;
-    box-shadow: 6px 5px 9px -5px rgba(138, 134, 138, 1);
+    box-shadow: 6px 5px 9px -5px #8a868a;
     display: grid;
     grid-template-rows: 50px 1fr;
 }

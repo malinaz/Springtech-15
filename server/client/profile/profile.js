@@ -3,7 +3,7 @@ function profile() {
 }
 
 function createProfilePage(user) {
-    const body = $('body');
+    const body= $('body');
     const profileMain = $('<div></div>').addClass('profile-main');
     const profileContainer = $('<div></div>').addClass('profile-container');
     const userDetails = $('<div></div>').addClass('user-details');
