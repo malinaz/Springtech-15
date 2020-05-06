@@ -1,0 +1,151 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 50px auto;
+  background-color: #006064;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container .menu {
+  background-color: white;
+}
+
+.container .content {
+  background-color: #00838e;
+  height: auto;
+  margin: 0 auto;
+  width: 75%;
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-row-gap: 50px;
+}
+
+.container .content .add-post {
+  width: 75%;
+  display: flex;
+  background-color: #4fb3be;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.container .content .add-post input {
+  width: 75%;
+}
+.container .content .add-post input,
+button {
+  font-size: 20px;
+  padding: 5px;
+  margin: auto 0;
+  margin-left: 10px;
+}
+.container .content .add-post button,
+.container .content .posts-list .post-element button,
+.container .update-popup .update-div button {
+  border-radius: 10px;
+  background-color: #00838e;
+  color: white;
+  padding: 5px 10px;
+  margin: auto auto;
+}
+.container .content .posts-list {
+  list-style: none;
+  margin: 0 auto;
+  width: 75%;
+  padding: 0;
+}
+.container .content .posts-list .post-element {
+  background-color: white;
+  color: #00838e;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.container .content .posts-list .post-element .text-post {
+  padding: 10px;
+  margin: 0px;
+  width: 75%;
+  height: auto;
+  text-align: start;
+}
+.container .content .posts-list .post-element input {
+  margin-left: 10px;
+  font-size: 15px;
+  padding: 3px;
+  width: 50%;
+  border-radius: 5px;
+}
+.container .content .posts-list .post-element button {
+  margin: 0px 10px;
+  font-size: 15px;
+}
+.container .content .posts-list .post-element .details-btn {
+  width: 100%;
+  height: 35px;
+}
+.container .content .posts-list .post-element .details-btn button {
+  float: right;
+  margin: 2px;
+}
+
+.container .content .posts-list .post-element .fas.fa-ellipsis-v {
+  background-color: #ffffff;
+  color: #00838e;
+  margin: 0 0 auto auto;
+  border: none;
+  font-size: 25px;
+}
+.container .content .posts-list .post-element .crud-operations {
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+.container .content .posts-list .post-element .crud-option {
+  cursor: pointer;
+}
+.container .update-popup,
+.container .delete-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  opacity: 0.7;
+}
+.container .update-popup .update-div,
+.container .delete-popup .delete-div {
+  background-color: #00838e;
+  opacity: 1;
+  color: white;
+  border-radius: 10px;
+  height: 150px;
+  width: 270px;
+  font-size: 20px;
+  font-weight: bold;
+  position: fixed;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+.container .update-popup .update-div p,
+.container .delete-popup .delete-div p {
+  padding: 0 5px;
+}
+.container .update-popup .update-div button,
+.container .delete-popup .delete-div button {
+  background-color: #ffffff;
+  color: #00838e;
+  margin: 10px 10px 0 0;
+}
