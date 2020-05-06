@@ -46,7 +46,7 @@ function initRouters() {
     app.use(express.json());
     app.use('/', router);
     app.use('/api/user', userRouter);
-    app.use('/api/post/',postRouter);
+    app.use('/api/post',postRouter);
     app.use('/api/comment',commentRouter);
 }
 
