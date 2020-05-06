@@ -1,3 +1,4 @@
+/* CSS RESET */
 html, body {
     height: 100%;
     margin: 0;
@@ -13,6 +14,109 @@ h1 {
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+/* GLOBAL CSS VARIABLES */
 :root {
     --shadow-container-color: #00363a;
+}
+
+/* NAVBAR CSS */
+.navbar {
+    background-color: #00363a;
+    height: 50px;
+}
+
+.navbar .nav {
+    display: grid;
+    grid-template-columns: 50px auto;
+    height: 100%;
+    padding: 0 50px;
+    column-gap: 20px;
+}
+
+.dropdown .dropdown-btn {
+    display: none;
+}
+
+.nav .logo {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: #00838e;
+}
+
+.dropdown .nav-list {
+    display: flex;
+    height: 100%;
+}
+
+.nav-list .list-item {
+    height: 100%;
+    color: #fff;
+    font-size: 1.25rem;
+    display: grid;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.nav-list .list-item:hover {
+    background-color: #006064;
+}
+
+.nav-list .list-item:last-child {
+    margin-left: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar .nav {
+        position: relative;
+    }
+
+    .dropdown .nav-list {
+        display: none;
+    }
+
+    .dropdown .dropdown-btn {
+        display: block;
+    }
+
+    .navbar .nav {
+        grid-template-columns: 50px 50px;
+        justify-content: space-between;
+    }
+
+    .dropdown .dropdown-btn {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .dropdown-btn i {
+        font-size: 2rem;
+        color: #00838e;
+    }
+
+    .dropdown:hover .nav-list {
+        display: flex;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        background-color: #00838e;
+        flex-direction: column;
+        height: 100px;
+    }
+
+    .nav-list .list-item:last-child {
+        margin: 0;
+    }
 }

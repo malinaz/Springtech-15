@@ -1,0 +1,124 @@
+h,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.profile-main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(231, 227, 227);
+}
+
+.profile-container {
+    width: 75%;
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    grid-row-gap: 10px;
+}
+
+.user-details {
+    border: 1px solid rgb(206, 205, 205);
+    grid-row: 1;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    /*grid-column-gap: 30px; */
+    box-shadow: 6px 5px 9px -5px #8a868a;
+}
+
+.profile-posts-section {
+    border: 1px solid rgb(206, 205, 205);
+    grid-row: 2;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 6px 5px 9px -5px #8a868a;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+}
+
+.posts-header {
+    grid-row: 1;
+    display: flex;
+}
+.profile-posts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background-color: #00838e;
+    color: white;
+    font-size: 25px;
+}
+
+.profile-posts:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.user-info {
+    grid-column: 2;
+    align-self: center;
+    font-size: 20px;
+    line-height: 1.5;
+    font-family: 'Gill Sans', sans-serif;
+}
+
+.profile-picture {
+    grid-column: 1;
+    border-radius: 50%;
+    background-color: #006064;
+    width: 150px;
+    height: 150px;
+    align-self: center;
+    justify-self: center;
+    border: 3px solid #00363a;
+    position: relative;
+}
+
+.photo-name {
+    position: absolute;
+    color: #fff;
+    font-size: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+}
+
+@media only screen and (max-width: 768px) {
+    .user-info {
+        font-size: 12px;
+    }
+
+    .profile-picture {
+        min-width: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .profile-container {
+        width: 75%;
+        display: grid;
+        grid-template-rows: 100px 1fr;
+        grid-row-gap: 10px;
+    }
+
+    .photo-name {
+        font-size: 25px;
+    }
+
+    .profile-posts {
+        font-size: 12px;
+    }
+    .profile-picture-container {
+        min-width: 70px;
+    }
+}
