@@ -1,0 +1,65 @@
+.container {
+    height: 100%;
+    display: grid;
+}
+
+.register-box {
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: 50px auto 50px 20px;
+    row-gap: 10px;
+    padding: 20px;
+    background-color: #4fb3be;
+    width: 500px;
+    box-shadow: 5px 5px 5px #00363a;
+    border-radius: 3px;
+}
+
+.register-box .box-title {
+    align-self: center;
+    justify-self: center;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: default;
+    color: #00363a;
+}
+
+.register-box .register-form {
+    display: grid;
+    grid-template-rows: repeat(5, 30px);
+    row-gap: 10px;
+}
+
+.register-form .form-input {
+    width: 300px;
+    justify-self: center;
+    color: #00363a;
+    box-shadow: 3px 3px 3px #006064;
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.register-box .register-btn {
+    align-self: center;
+    justify-self: center;
+    color: #fff;
+    background-color: #006064;
+    font-weight: 700;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    border-radius: 3px;
+}
+
+.register-box .register-btn:hover {
+    transform: scale(1.05);
+    background-color: #00363a;
+}
+
+.register-box .login-text {
+    justify-self: center;
+    align-self: center;
+    color: #00363a;
+}
