@@ -1,4 +1,5 @@
 function profile() {
+    renderNavbar();
     getUser();
 }
 

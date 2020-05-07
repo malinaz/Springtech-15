@@ -63,3 +63,13 @@
     align-self: center;
     color: #00363a;
 }
+
+.login-text a {
+    color: #005661;
+}
+
+@media only screen and (max-width: 768px) {
+    .register-box {
+      width: auto;
+    }
+  }

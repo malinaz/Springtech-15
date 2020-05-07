@@ -2,7 +2,8 @@ const express = require('express');
 const CONFIG = require('./config.js');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.router');
-const postsRouter = require('./Posts/post.router');
+const postRouter = require('./Posts/post.router');
+const commentRouter = require('./Comments/comment.router');
 const path = require('path');
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.get('/profile', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/profile/profile.html'));
 });
 
-router.get('/login', function (req, res) {
+router.get(['/', '/login'], function (req, res) {
     res.sendFile(path.join(__dirname + '/client/auth/login/login.html'));
 });
 
@@ -57,7 +58,8 @@ function initRouters() {
     app.use(express.json());
     app.use('/', router);
     app.use('/api/user', userRouter);
-    app.use('/api/posts', postsRouter);
+    app.use('/api/post',postRouter);
+    app.use('/api/comment',commentRouter);
 }
 
 function runApp() {

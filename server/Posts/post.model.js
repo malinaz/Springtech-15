@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
     text: String,
-    //comments: [],
+    comments: [],
     likes: Number,
-    userId: String,
-    // userId: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: 'User' -> referinta la tabela user
-    // }
+    userId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const posts = mongoose.model('posts', postSchema);
