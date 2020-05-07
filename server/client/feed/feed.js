@@ -1,6 +1,7 @@
 const SERVER_URL = 'http://localhost:3000';
 
 function init() {
+  renderNavbar();
   buildMenu();
   buildContent();
 }

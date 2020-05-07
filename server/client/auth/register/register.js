@@ -39,7 +39,7 @@ function sendCreateRequest(user) {
         },
         error: function (error) {
             console.log(error);
-            alert("Username is already taken !!!");
+            alert("Username or Email is already taken !!!");
         }
     });
 }

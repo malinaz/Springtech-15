@@ -19,4 +19,14 @@ function renderNavbar() {
     navbar.append(nav);
 
     $('body').prepend(navbar);
+    setNabvarEvents();
+}
+
+function setNabvarEvents() {
+    $('.list-item').on('click', function(event) {
+        const target = $(event.target);
+        if (target.text() == "Log Out") {
+            localStorage.removeItem('userId');
+        }
+    })
 }
