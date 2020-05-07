@@ -44,19 +44,22 @@ function createProfilePage(user) {
     const email = $('<p></p>').addClass('email');
     const gender = $('<p></p>').addClass('genre');
 
-    const myPosts = $('<div></div>').addClass('profile-posts my-posts');
+    const myPosts = $('<div></div>').addClass('profile-posts my-posts selected');
     const likedPosts = $('<div></div>').addClass('profile-posts liked-posts');
     const savedPosts = $('<div></div>').addClass('profile-posts liked-posts');
 
     myPosts.click(() => {
+        selectElement(myPosts);
         displayMyPosts();
     });
 
     likedPosts.click(() => {
+        selectElement(likedPosts);
         displayLikedPosts();
     });
 
     savedPosts.click(() => {
+        selectElement(savedPosts);
         displaySavedPosts();
     });
 
@@ -91,9 +94,18 @@ function createProfilePage(user) {
     body.append(profileMain);
 }
 
+function deselectAll() {
+    $('.selected').removeClass('selected');
+}
+
+function selectElement(element) {
+    deselectAll();
+    element.addClass('selected');
+}
+
 function getUser() {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
+    //console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -102,8 +114,9 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                console.log(data);
+                //console.log(data);
                 createProfilePage(data);
+                displayMyPosts();
             },
         });
     }
@@ -124,7 +137,31 @@ function displayMyPosts(){
 
 function constructPostElement(onePost) {
 
-    console.log(onePost);
+    //console.log(onePost);
+
+    const acronymList = onePost.userId.fullName.match(/\b\w/g);
+    let firstNameLetter;
+    let lastNameLetter;
+    if (acronymList.length > 1) {
+        firstNameLetter = acronymList[0].toUpperCase();
+        lastNameLetter = acronymList[1].toUpperCase();
+    } else {
+        firstNameLetter = acronymList[0].toUpperCase();
+        lastNameLetter = '';
+    }
+    const photoContainer = $('<div></div>').addClass(
+        'post-author-picture-container'
+    );
+
+    const photo = $('<div></div>').addClass('post-author-profile-picture');
+
+    const photoName = $('<div></div>').addClass('post-author-photo-name');
+
+    photoName.html(`${firstNameLetter}${lastNameLetter}`);
+    photo.append(photoName);
+
+    photoContainer.append(photo);
+
     const postElement = $('<div></div>').addClass('post-element');
     const authorName = $('<div></div>').addClass('post-author-fullname');
     const postTextContent = $('<div></div>').addClass('post-text-content');
@@ -136,6 +173,7 @@ function constructPostElement(onePost) {
     likeCount.html(`Likes: ${onePost.likes}`);
     commentCount.html(`Comments: ${onePost.comments.length}`);
 
+    postElement.append(photoContainer);
     postElement.append(authorName);
     postElement.append(postTextContent);
     postElement.append(likeCount);
