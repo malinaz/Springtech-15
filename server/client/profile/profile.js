@@ -4,17 +4,25 @@ function profile() {
 }
 
 function createProfilePage(user) {
-    const body= $('body');
+    const body = $('body');
     const profileMain = $('<div></div>').addClass('profile-main');
     const profileContainer = $('<div></div>').addClass('profile-container');
     const userDetails = $('<div></div>').addClass('user-details');
     const profilePosts = $('<div></div>').addClass('profile-posts-section');
     const postsHeader = $('<div></div>').addClass('posts-header');
 
-    const acronymList = user.name.match(/[A-Z]/g);
+    const acronymList = user.fullName.match(/\b\w/g);
 
-    const firstName = acronymList[0];
-    const lastName = acronymList[1];
+    let firstNameLetter;
+    let lastNameLetter;
+
+    if (acronymList.length > 1) {
+        firstNameLetter = acronymList[0].toUpperCase();
+        lastNameLetter = acronymList[1].toUpperCase();
+    } else {
+        firstNameLetter = acronymList[0].toUpperCase();
+        lastNameLetter = '';
+    }
 
     const photoContainer = $('<div></div>').addClass(
         'profile-picture-container'
@@ -24,7 +32,7 @@ function createProfilePage(user) {
 
     const photoName = $('<div></div>').addClass('photo-name');
 
-    photoName.html(`${firstName}${lastName}`);
+    photoName.html(`${firstNameLetter}${lastNameLetter}`);
     photo.append(photoName);
 
     photoContainer.append(photo);
@@ -59,7 +67,7 @@ function createProfilePage(user) {
     postsHeader.append(likedPosts);
     postsHeader.append(savedPosts);
 
-    name.html(user.name);
+    name.html(user.fullName);
     username.html(user.username);
     email.html(user.email);
     gender.html(user.gender);
@@ -82,12 +90,21 @@ function createProfilePage(user) {
 }
 
 function getUser() {
-    createProfilePage({
-        name: 'Nume si Prenume',
-        username: 'Username',
-        email: 'internship@springtech.com',
-        gender: 'Female',
-    });
+    const userId = localStorage.getItem('userId');
+    console.log(userId);
+
+    if (userId) {
+        $.ajax({
+            url: `http://localhost:3000/api/user/${userId}`,
+            type: 'GET',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: (data) => {
+                console.log(data);
+                createProfilePage(data);
+            },
+        });
+    }
 }
 
 $(() => {
