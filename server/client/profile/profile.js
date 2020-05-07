@@ -171,6 +171,16 @@ function displayLikedPosts(){
 
 function displaySavedPosts(){
 
+    const userId = localStorage.getItem('userId');
+
+    $.ajax({
+        url: `http://localhost:3000/api/user/${userId}/posts?type=saved`,
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: renderPosts,
+    });
+
 }
 
 $(() => {

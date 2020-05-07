@@ -44,7 +44,7 @@ const userDatastore = {
     },
     findSavedPosts: (id, success, fail) => {
         User.findById(id)
-            .populate('savedPosts')
+            .populate({path: 'savedPosts', populate: {path: 'userId', select: 'fullName'}})
             .then((data) => {
                 success(data.savedPosts);
             })
