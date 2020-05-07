@@ -160,6 +160,18 @@ p {
     transform: translate(-50%, -50%);
 }
 
+.posts-empty-wrapper {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.posts-empty-message {
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 30px;
+}
+
 @media only screen and (max-width: 768px) {
     .user-info {
         font-size: 12px;
@@ -216,5 +228,13 @@ p {
     .post-author-photo-name {
         line-height: 15px;
         font-size: 8px;
+    }
+
+    .posts-empty-wrapper {
+        height: 150px;
+    }
+
+    .posts-empty-message {
+        font-size: 15px;
     }
 }

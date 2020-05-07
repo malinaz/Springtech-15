@@ -187,10 +187,17 @@ function renderPosts(postList){
 
     const postsContent = $('.posts-content');
     postsContent.empty();
-    for (let post of postList){
-        postsContent.append(constructPostElement(post));
+    if (postList.length > 0){
+        for (let post of postList){
+            postsContent.append(constructPostElement(post));
+        }
+    } else {
+        const emptyWrapper = $('<div></div>').addClass('posts-empty-wrapper');
+        const emptyMessage = $('<div></div>').addClass('posts-empty-message');
+        emptyMessage.html('No posts to display!');
+        emptyWrapper.append(emptyMessage);
+        postsContent.append(emptyWrapper);
     }
-
 }
 
 function displayLikedPosts(){
