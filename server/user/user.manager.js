@@ -7,7 +7,7 @@ const userManager = {
     },
     getPosts: (id, type, success, fail) => {
         if (!type) {
-            postDataStore.getAllPosts(id, success, fail);
+            postDataStore.getAllPostsAndPopulateFullName(id, success, fail);
         }
 
         if (type === 'liked') {

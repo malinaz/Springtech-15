@@ -5,7 +5,8 @@ p {
 }
 
 .profile-main {
-    height: 100%;
+    height: fit-content;
+    min-height: calc(100vh - 50px);
     display: flex;
     justify-content: center;
     background-color: rgb(231, 227, 227);
@@ -36,12 +37,14 @@ p {
     box-shadow: 6px 5px 9px -5px #8a868a;
     display: grid;
     grid-template-rows: 50px 1fr;
+    height: fit-content;
 }
 
 .posts-header {
     grid-row: 1;
     display: flex;
 }
+
 .profile-posts {
     display: flex;
     align-items: center;
@@ -52,7 +55,11 @@ p {
     font-size: 25px;
 }
 
-.profile-posts:hover {
+.profile-posts.selected {
+    background-color: #00363a;
+}
+
+.profile-posts:hover, .post-element .post-like-count:hover, .post-element .post-comment-count:hover {
     opacity: 0.6;
     cursor: pointer;
 }
@@ -93,6 +100,78 @@ p {
     min-width: 200px;
 }
 
+.post-element {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: calc(100% - 22px);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Gill Sans', sans-serif;
+    padding: 5px;
+}
+
+.post-element:last-child {
+    margin-bottom: 10px;
+}
+
+.post-element .post-author-fullname {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.post-element .post-text-content {
+    font-size: 20px;
+    width: 100%;
+    margin-bottom: 5px;white-space: pre-wrap;
+}
+
+.post-element .post-like-count, .post-element .post-comment-count {
+    padding: 2px;
+    background-color: #006064;
+    color: white;
+    border: 1px solid #00363a;
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+.post-author-picture-container {
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+.post-author-profile-picture {
+    border-radius: 50%;
+    background-color: #006064;
+    border: 1px solid #00363a;
+    position: relative;
+    width: 28px;
+    height: 28px;
+}
+
+.post-author-photo-name {
+    position: absolute;
+    color: #fff;
+    line-height: 26px;
+    font-size: 12px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.posts-empty-wrapper {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.posts-empty-message {
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 30px;
+}
+
 @media only screen and (max-width: 768px) {
     .user-info {
         font-size: 12px;
@@ -118,7 +197,44 @@ p {
     .profile-posts {
         font-size: 12px;
     }
+
     .profile-picture-container {
         min-width: 70px;
+    }
+
+    .post-element .post-author-fullname {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .post-element .post-text-content {
+        font-size: 12px;
+    }
+
+    .post-element .post-like-count, .post-element .post-comment-count {
+        font-size: 8px;
+    }
+
+    .post-author-picture-container {
+        width: 20px;
+        height: 20px;
+    }
+
+    .post-author-profile-picture {
+        width: 18px;
+        height: 18px;
+    }
+
+    .post-author-photo-name {
+        line-height: 15px;
+        font-size: 8px;
+    }
+
+    .posts-empty-wrapper {
+        height: 150px;
+    }
+
+    .posts-empty-message {
+        font-size: 15px;
     }
 }
