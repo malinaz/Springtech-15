@@ -86,23 +86,4 @@ function getAllPosts(request, response) {
 
 
 
-
-
-/*function getComments(request, response) {
-    const id = request.params.id;
-    postsDatastore.findComments(id, (data) => {
-        response.status(200).json(data);
-    }, (error) => {
-        response.status(500).json(error);
-    });
-}
-
-//a comment contains text and the user
-function postComment(request, response) {
-    const value = request.body
-}
-
-function deleteComment(request, response) {
-
-}*/
 module.exports = postsRouter;

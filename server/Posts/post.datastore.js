@@ -68,17 +68,6 @@ const postsDatastore = {
             });
     }
 
-
-
-    /*findComments: (id, success, fail) => {
-        Post.findById(id)
-            .then((data) => {
-                success(data);
-            }).catch((error) => {
-            fail(error);
-        });
-    }*/
-
 }
 
 module.exports = postsDatastore;
