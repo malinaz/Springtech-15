@@ -25,14 +25,24 @@ const userDatastore = {
     },
 
     findUserById: (id, success, fail) => {
-        User.findById(id)
+        User.findOne({_id: id})
+            .then((data) => {
+                success(data)
+            })
+            .catch((error) => {
+                fail(error)
+            });
+    },
+
+    updateById: (id, user, success, fail) => {
+        User.findByIdAndUpdate(id, user, {new: true})
             .then((data) => {
                 success(data);
             })
             .catch((error) => {
-                fail(error);
+                fail(error)
             });
-    },
+    }
 };
 
 module.exports = userDatastore;

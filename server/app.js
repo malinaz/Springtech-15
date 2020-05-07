@@ -2,6 +2,8 @@ const express = require('express');
 const CONFIG = require('./config.js');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.router');
+const postRouter = require('./Posts/post.router');
+
 const path = require('path');
 const router = express.Router();
 
@@ -32,6 +34,10 @@ router.get('/register', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/auth/register/register.html'));
 });
 
+router.get('/feed', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/feed/feed.html'));
+});
+
 router.get('/profile', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/profile/profile.html'));
 });
@@ -56,6 +62,7 @@ function initRouters() {
     app.use(express.json());
     app.use('/', router);
     app.use('/api/user', userRouter);
+    app.use('/api/post', postRouter);
 }
 
 function runApp() {
