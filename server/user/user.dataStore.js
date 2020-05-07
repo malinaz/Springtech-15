@@ -32,7 +32,6 @@ const userDatastore = {
                 fail(error)
             });
     },
-<<<<<<< HEAD
 
     updateById: (id, user, success, fail) => {
         User.findByIdAndUpdate(id, user, {new: true})
@@ -42,8 +41,8 @@ const userDatastore = {
             .catch((error) => {
                 fail(error)
             });
-    }
-=======
+    },
+
     findLikedPosts: (id, success, fail) => {
         User.findById(id)
             .populate('likedPosts')
@@ -63,8 +62,8 @@ const userDatastore = {
             .catch((error) => {
                 fail(error);
             });
-    },
->>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
+    }
+
 };
 
 module.exports = userDatastore;

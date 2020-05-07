@@ -196,17 +196,13 @@ function createNewPost(post) {
       //show all comments
     });
 
+    // manage LIKE button
     const likeBtn = $("<button>", "</button>");
     likeBtn.addClass("far fa-thumbs-up");
     likeBtn.on("click", () => {
-      // aiciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
-        manageLikeButton(userId, post._id, (response1) => {
-            if(response1) {
-              getPostById(response1._id, (response2) => {
-                post.likes = response2.likes;
-              })
-            }
-            console.log(post);
+        manageLikeButton(userId, post._id, (response) => {   // response = post with updated number of likes
+           // change number of likes in the element of the array posts
+            post.likes = response.likes;
         })
     });
 
@@ -230,7 +226,7 @@ window.onload = init;
 let userId =  localStorage.getItem('userId');
 function manageLikeButton(userId, postId, callback) {
   $.ajax({
-    url: `${SERVER_URL}/api/post/like/${userId}/${postId}`,
+    url: `${SERVER_URL}/api/post/like/user/${userId}/post/${postId}`,
     type: 'POST',
     dataType: 'json',
     contentType: "application/json; charset=utf-8",

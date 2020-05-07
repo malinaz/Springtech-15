@@ -47,9 +47,7 @@ const postsDatastore = {
             }).catch((error) => {
             fail(error);
         });
-<<<<<<< HEAD
     },
-
 
     getPostById: (id, success, fail) => {
         Post.findOne({_id: id})
@@ -80,9 +78,7 @@ const postsDatastore = {
             fail(error);
         });
     }*/
-=======
-    }
->>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
+
 }
 
 module.exports = postsDatastore;

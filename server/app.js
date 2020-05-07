@@ -3,11 +3,8 @@ const CONFIG = require('./config.js');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.router');
 const postRouter = require('./Posts/post.router');
-<<<<<<< HEAD
 
-=======
 const commentRouter = require('./Comments/comment.router');
->>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
 const path = require('path');
 const router = express.Router();
 
@@ -66,12 +63,8 @@ function initRouters() {
     app.use(express.json());
     app.use('/', router);
     app.use('/api/user', userRouter);
-<<<<<<< HEAD
-    app.use('/api/post', postRouter);
-=======
     app.use('/api/post',postRouter);
     app.use('/api/comment',commentRouter);
->>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
 }
 
 function runApp() {

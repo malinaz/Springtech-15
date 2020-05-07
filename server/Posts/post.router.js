@@ -63,7 +63,6 @@ function deletePost(request, response) {
     });
 }
 
-<<<<<<< HEAD
 function manageLikes(request, response) {
     const userId = request.params.userId;
     const postId = request.params.postId;
@@ -106,8 +105,4 @@ function postComment(request, response) {
 function deleteComment(request, response) {
 
 }*/
-
-
-=======
->>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
 module.exports = postsRouter;
