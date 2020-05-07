@@ -1,4 +1,5 @@
 const userDataStore = require('./user.dataStore');
+const postDataStore = require('../Posts/post.datastore');
 
 const userManager = {
     getUser: (id, success, fail) => {
@@ -6,7 +7,7 @@ const userManager = {
     },
     getPosts: (id, type, success, fail) => {
         if (!type) {
-            // load posts from post data store by user id
+            postDataStore.getAllPosts(id, success, fail);
         }
 
         if (type === 'liked') {
