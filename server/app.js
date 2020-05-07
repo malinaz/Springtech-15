@@ -2,6 +2,7 @@ const express = require('express');
 const CONFIG = require('./config.js');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.router');
+const postsRouter = require('./Posts/post.router');
 const path = require('path');
 const router = express.Router();
 
@@ -56,6 +57,7 @@ function initRouters() {
     app.use(express.json());
     app.use('/', router);
     app.use('/api/user', userRouter);
+    app.use('/api/posts', postsRouter);
 }
 
 function runApp() {

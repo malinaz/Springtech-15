@@ -5,9 +5,9 @@ const userSchema = new mongoose.Schema({
     username: { type: String, unique: true },
     password: String,
     email: { type: String, unique: true },
-    gender: { type: String, enum: ["male", "female"] },
-    likedPosts: [{ type: mongoose.Types.ObjectId, ref: "Post" }],
-    savedPosts: [{ type: mongoose.Types.ObjectId, ref: "Post" }]
+    gender: { type: String, enum: ['male', 'female'] },
+    likedPosts: [{ type: mongoose.Types.ObjectId, ref: 'posts' }],
+    savedPosts: [{ type: mongoose.Types.ObjectId, ref: 'posts' }],
 });
 
 const User = mongoose.model('User', userSchema);
