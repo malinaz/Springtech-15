@@ -31,6 +31,15 @@ const postsDatastore = {
         });
     },
 
+    getAll: (success, fail) => {
+        Post.find()
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
     getAllPostsAndPopulateFullName: (id, success, fail) => {
         Post.find({"userId": id})
             .populate('userId', 'fullName')
