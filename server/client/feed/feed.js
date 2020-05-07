@@ -1,3 +1,5 @@
+const SERVER_URL = 'http://localhost:3000';
+
 function init() {
   buildMenu();
   buildContent();
@@ -12,25 +14,7 @@ function buildMenu() {
 
 //aray with posts
 let posts = [
-  {
-    text: "LALALALAL LALLALALAL LAAAAAAAAAAAAAAAAAAA",
-    comments: {
-      user: "user1",
-      comment: "Nice",
-    },
-    thisUserPost: true,
-  },
-  {
-    text:
-      "LALALALAL LALLAaaaaaaaaaaaaaaaaaaaaaaaaALAL LAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAA",
-    comments: [
-      {
-        user: "user2",
-        comment: "Bad",
-      },
-    ],
-    thisUserPost: false,
-  },
+
 ];
 //create content
 const content = $("<div>", "</div>");
@@ -56,12 +40,17 @@ function buildContent() {
   content.append(addPost);
 
   getAllPosts();
-  renderPostsList();
+  //renderPostsList();
   $("#container").append(content);
 }
 
 function getAllPosts() {
-  // get posts from database
+  getAll( (response) => {
+    if (response) {
+      console.log(posts);
+      renderPostsList();
+    }
+  })
 }
 
 const postsList = $("<ul>", "</ul>");
@@ -207,10 +196,14 @@ function createNewPost(post) {
       //show all comments
     });
 
+    // manage LIKE button
     const likeBtn = $("<button>", "</button>");
     likeBtn.addClass("far fa-thumbs-up");
     likeBtn.on("click", () => {
-      //like a post
+        manageLikeButton(userId, post._id, (response) => {   // response = post with updated number of likes
+           // change number of likes in the element of the array posts
+            post.likes = response.likes;
+        })
     });
 
     const savePostBtn = $("<button>", "</button>");
@@ -227,3 +220,53 @@ function createNewPost(post) {
   return liElement;
 }
 window.onload = init;
+
+
+
+let userId =  localStorage.getItem('userId');
+function manageLikeButton(userId, postId, callback) {
+  $.ajax({
+    url: `${SERVER_URL}/api/post/like/user/${userId}/post/${postId}`,
+    type: 'POST',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function (response) {
+      callback(response);
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+
+function getPostById(postId, callback) {
+  $.ajax({
+    url: `${SERVER_URL}/api/post/${postId}`,
+    type: 'GET',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function (response) {
+      callback(response);
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+
+function getAll(callback) {
+  $.ajax({
+    url: `${SERVER_URL}/api/post/all`,
+    type: 'GET',
+    dataType: 'json',
+    contentType: "application/json; charset=utf-8",
+    success: function (response) {
+      posts = response;
+      callback(response);
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+

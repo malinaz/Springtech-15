@@ -57,7 +57,27 @@ const postsDatastore = {
             }).catch((error) => {
             fail(error);
         });
+    },
+
+    getPostById: (id, success, fail) => {
+        Post.findOne({_id: id})
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
+    updateById: (id, post, success, fail) => {
+        Post.findByIdAndUpdate(id, post, {new: true})
+            .then((data) => {
+                success(data);
+            })
+            .catch((error) => {
+                fail(error)
+            });
     }
+
 }
 
 module.exports = postsDatastore;
