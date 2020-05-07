@@ -118,7 +118,7 @@ function displayMyPosts(){
         type: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-        success: renderMyPosts,
+        success: renderPosts,
     });
 }
 
@@ -145,17 +145,27 @@ function constructPostElement(onePost) {
 
 }
 
-function renderMyPosts(postList){
+function renderPosts(postList){
 
     const postsContent = $('.posts-content');
     postsContent.empty();
-    for (let myPost of postList){
-        postsContent.append(constructPostElement(myPost));
+    for (let post of postList){
+        postsContent.append(constructPostElement(post));
     }
 
 }
 
 function displayLikedPosts(){
+
+    const userId = localStorage.getItem('userId');
+
+    $.ajax({
+        url: `http://localhost:3000/api/user/${userId}/posts?type=liked`,
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: renderPosts,
+    });
 
 }
 
