@@ -35,6 +35,7 @@ function sendCreateRequest(user) {
         success: function (result) {
             console.log(result);
             alert("Successfully created new user. You can log in now !");
+            window.location = '/login';
         },
         error: function (error) {
             console.log(error);
