@@ -49,7 +49,6 @@ function getUserById(req, res) {
         (error) => res.status(500).json(error)
     );
 }
-
 function getPostsForUser(req, res) {
     const id = req.params.id;
     const type = req.query.type;
@@ -65,3 +64,4 @@ function getPostsForUser(req, res) {
 }
 
 module.exports = userRouter;
+
