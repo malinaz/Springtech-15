@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
     text: String,
-    user:ObjectId
+    postId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'posts'
+    }
 });
 
 const comment = mongoose.model('comments', commentSchema);

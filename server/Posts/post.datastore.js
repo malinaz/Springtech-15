@@ -47,6 +47,7 @@ const postsDatastore = {
             }).catch((error) => {
             fail(error);
         });
+<<<<<<< HEAD
     },
 
 
@@ -79,6 +80,9 @@ const postsDatastore = {
             fail(error);
         });
     }*/
+=======
+    }
+>>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
 }
 
 module.exports = postsDatastore;

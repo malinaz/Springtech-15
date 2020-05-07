@@ -12,9 +12,6 @@ postsRouter.route('').post(makePost);
 postsRouter.route('/id/:id').get(getPosts);
 postsRouter.route('/id/:id').delete(deletePost);
 postsRouter.route('/id/:id').put(putPost);
-//postsRouter.route('/id/:id/value/:value').put(putPost); ->caz cand se trimite prin link value
-
-//postsDatastore.route('/id/:id').get(getComments);
 
 function makePost(request, response) {
     const value = request.body;
@@ -27,8 +24,7 @@ function makePost(request, response) {
 
 function putPost(request, response) {
     const id = request.params.id;
-    const value = request.body.text; //face trimitere la fieldul text din Model
-    //daca se face put din link -> se pune request.body.value si atunci nu se mai ia din body
+    const value = request.body.text;
 
     postsDatastore.updatePost(id, value, (data) => {
         response.status(200).json(data);
@@ -67,6 +63,7 @@ function deletePost(request, response) {
     });
 }
 
+<<<<<<< HEAD
 function manageLikes(request, response) {
     const userId = request.params.userId;
     const postId = request.params.postId;
@@ -111,4 +108,6 @@ function deleteComment(request, response) {
 }*/
 
 
+=======
+>>>>>>> 96b14e14949ea8e86406dca7833b1ae752546158
 module.exports = postsRouter;
