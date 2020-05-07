@@ -31,6 +31,25 @@ const postsDatastore = {
         });
     },
 
+    getAll: (success, fail) => {
+        Post.find()
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
+    getAllPostsAndPopulateFullName: (id, success, fail) => {
+        Post.find({"userId": id})
+            .populate('userId', 'fullName')
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
     removePost: (id, success, fail) => {
         Post.deleteOne({"_id": id})
             .then((data) => {
@@ -38,7 +57,27 @@ const postsDatastore = {
             }).catch((error) => {
             fail(error);
         });
+    },
+
+    getPostById: (id, success, fail) => {
+        Post.findOne({_id: id})
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
+    updateById: (id, post, success, fail) => {
+        Post.findByIdAndUpdate(id, post, {new: true})
+            .then((data) => {
+                success(data);
+            })
+            .catch((error) => {
+                fail(error)
+            });
     }
+
 }
 
 module.exports = postsDatastore;

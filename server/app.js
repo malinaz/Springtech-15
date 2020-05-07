@@ -3,6 +3,7 @@ const CONFIG = require('./config.js');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.router');
 const postRouter = require('./Posts/post.router');
+
 const commentRouter = require('./Comments/comment.router');
 const path = require('path');
 const router = express.Router();
@@ -32,6 +33,10 @@ app.use(express.static('client'));
 
 router.get('/register', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/auth/register/register.html'));
+});
+
+router.get('/feed', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/feed/feed.html'));
 });
 
 router.get('/profile', function (req, res) {

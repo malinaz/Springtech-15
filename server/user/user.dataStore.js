@@ -24,17 +24,28 @@ const userDatastore = {
             });
     },
     findUserById: (id, success, fail) => {
-        User.findById(id)
+        User.findOne({_id: id})
+            .then((data) => {
+                success(data)
+            })
+            .catch((error) => {
+                fail(error)
+            });
+    },
+
+    updateById: (id, user, success, fail) => {
+        User.findByIdAndUpdate(id, user, {new: true})
             .then((data) => {
                 success(data);
             })
             .catch((error) => {
-                fail(error);
+                fail(error)
             });
     },
+
     findLikedPosts: (id, success, fail) => {
         User.findById(id)
-            .populate('likedPosts')
+            .populate({path: 'likedPosts', populate: {path: 'userId', select: 'fullName'}})
             .then((data) => {
                 success(data.likedPosts);
             })
@@ -44,14 +55,15 @@ const userDatastore = {
     },
     findSavedPosts: (id, success, fail) => {
         User.findById(id)
-            .populate('savedPosts')
+            .populate({path: 'savedPosts', populate: {path: 'userId', select: 'fullName'}})
             .then((data) => {
                 success(data.savedPosts);
             })
             .catch((error) => {
                 fail(error);
             });
-    },
+    }
+
 };
 
 module.exports = userDatastore;
