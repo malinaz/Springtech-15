@@ -125,12 +125,30 @@ function displayMyPosts(){
 function constructPostElement(onePost) {
 
     console.log(onePost);
+    const postElement = $('<div></div>').addClass('post-element');
+    const authorName = $('<div></div>').addClass('post-author-fullname');
+    const postTextContent = $('<div></div>').addClass('post-text-content');
+    const likeCount = $('<div></div>').addClass('post-like-count');
+    const commentCount = $('<div></div>').addClass('post-comment-count');
+
+    authorName.html(`${onePost.userId.fullName}`);
+    postTextContent.html(`${onePost.text}`);
+    likeCount.html(`Likes: ${onePost.likes}`);
+    commentCount.html(`Comments: ${onePost.comments.length}`);
+
+    postElement.append(authorName);
+    postElement.append(postTextContent);
+    postElement.append(likeCount);
+    postElement.append(commentCount);
+
+    return postElement;
 
 }
 
 function renderMyPosts(postList){
 
     const postsContent = $('.posts-content');
+    postsContent.empty();
     for (let myPost of postList){
         postsContent.append(constructPostElement(myPost));
     }

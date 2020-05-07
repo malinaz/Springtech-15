@@ -5,7 +5,8 @@ p {
 }
 
 .profile-main {
-    height: 100%;
+    height: fit-content;
+    min-height: calc(100vh - 50px);
     display: flex;
     justify-content: center;
     background-color: rgb(231, 227, 227);
@@ -36,6 +37,7 @@ p {
     box-shadow: 6px 5px 9px -5px #8a868a;
     display: grid;
     grid-template-rows: 50px 1fr;
+    height: fit-content;
 }
 
 .posts-header {
@@ -93,6 +95,40 @@ p {
     min-width: 200px;
 }
 
+.post-element {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: calc(100% - 22px);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Gill Sans', sans-serif;
+    padding: 5px;
+}
+
+.post-element:last-child {
+    margin-bottom: 10px;
+}
+
+.post-element .post-author-fullname {
+    font-size: 25px;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.post-element .post-text-content {
+    font-size: 20px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.post-element .post-like-count, .post-element .post-comment-count {
+    padding: 2px;
+    background-color: #006064;
+    color: white;
+    border: 1px solid #00363a;
+    margin-right: 20px;
+}
+
 @media only screen and (max-width: 768px) {
     .user-info {
         font-size: 12px;
@@ -118,7 +154,16 @@ p {
     .profile-posts {
         font-size: 12px;
     }
+
     .profile-picture-container {
         min-width: 70px;
+    }
+
+    .post-element .post-author-fullname {
+        font-size: 15px;
+    }
+
+    .post-element .post-text-content {
+        font-size: 12px;
     }
 }
