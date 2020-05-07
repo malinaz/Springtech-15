@@ -31,6 +31,16 @@ const postsDatastore = {
         });
     },
 
+    getAllPostsAndPopulateFullName: (id, success, fail) => {
+        Post.find({"userId": id})
+            .populate('userId', 'fullName')
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+            fail(error);
+        });
+    },
+
     removePost: (id, success, fail) => {
         Post.deleteOne({"_id": id})
             .then((data) => {

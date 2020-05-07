@@ -10,6 +10,7 @@ function createProfilePage(user) {
     const userDetails = $('<div></div>').addClass('user-details');
     const profilePosts = $('<div></div>').addClass('profile-posts-section');
     const postsHeader = $('<div></div>').addClass('posts-header');
+    const postsContent = $('<div></div>').addClass('posts-content');
 
     const acronymList = user.fullName.match(/\b\w/g);
 
@@ -48,15 +49,15 @@ function createProfilePage(user) {
     const savedPosts = $('<div></div>').addClass('profile-posts liked-posts');
 
     myPosts.click(() => {
-        getMyPosts();
+        displayMyPosts();
     });
 
     likedPosts.click(() => {
-        getLikedPosts();
+        displayLikedPosts();
     });
 
     savedPosts.click(() => {
-        getSavedPosts();
+        displaySavedPosts();
     });
 
     myPosts.html('My Posts');
@@ -83,6 +84,7 @@ function createProfilePage(user) {
     profileContainer.append(userDetails);
 
     profilePosts.append(postsHeader);
+    profilePosts.append(postsContent);
     profileContainer.append(profilePosts);
 
     profileMain.append(profileContainer);
@@ -105,6 +107,42 @@ function getUser() {
             },
         });
     }
+}
+
+function displayMyPosts(){
+
+    const userId = localStorage.getItem('userId');
+
+    $.ajax({
+        url: `http://localhost:3000/api/user/${userId}/posts`,
+        type: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+        success: renderMyPosts,
+    });
+}
+
+function constructPostElement(onePost) {
+
+    console.log(onePost);
+
+}
+
+function renderMyPosts(postList){
+
+    const postsContent = $('.posts-content');
+    for (let myPost of postList){
+        postsContent.append(constructPostElement(myPost));
+    }
+
+}
+
+function displayLikedPosts(){
+
+}
+
+function displaySavedPosts(){
+
 }
 
 $(() => {
