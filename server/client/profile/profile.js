@@ -44,7 +44,9 @@ function createProfilePage(user) {
     const email = $('<p></p>').addClass('email');
     const gender = $('<p></p>').addClass('genre');
 
-    const myPosts = $('<div></div>').addClass('profile-posts my-posts selected');
+    const myPosts = $('<div></div>').addClass(
+        'profile-posts my-posts selected'
+    );
     const likedPosts = $('<div></div>').addClass('profile-posts liked-posts');
     const savedPosts = $('<div></div>').addClass('profile-posts liked-posts');
 
@@ -122,8 +124,7 @@ function getUser() {
     }
 }
 
-function displayMyPosts(){
-
+function displayMyPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -136,7 +137,6 @@ function displayMyPosts(){
 }
 
 function constructPostElement(onePost) {
-
     //console.log(onePost);
 
     const acronymList = onePost.userId.fullName.match(/\b\w/g);
@@ -180,15 +180,13 @@ function constructPostElement(onePost) {
     postElement.append(commentCount);
 
     return postElement;
-
 }
 
-function renderPosts(postList){
-
+function renderPosts(postList) {
     const postsContent = $('.posts-content');
     postsContent.empty();
-    if (postList.length > 0){
-        for (let post of postList){
+    if (postList.length > 0) {
+        for (let post of postList) {
             postsContent.append(constructPostElement(post));
         }
     } else {
@@ -200,8 +198,7 @@ function renderPosts(postList){
     }
 }
 
-function displayLikedPosts(){
-
+function displayLikedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -211,11 +208,9 @@ function displayLikedPosts(){
         dataType: 'json',
         success: renderPosts,
     });
-
 }
 
-function displaySavedPosts(){
-
+function displaySavedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -225,10 +220,11 @@ function displaySavedPosts(){
         dataType: 'json',
         success: renderPosts,
     });
-
 }
 
 $(() => {
     // shared
-    profile();
+    checkPagePermission(() => {
+        profile();
+    });
 });
