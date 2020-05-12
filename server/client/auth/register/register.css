@@ -10,9 +10,9 @@
     grid-template-rows: 50px auto 50px 20px;
     row-gap: 10px;
     padding: 20px;
-    background-color: #4fb3be;
+    background-color: var(--primary-light);
     width: 500px;
-    box-shadow: 5px 5px 5px #00363a;
+    box-shadow: 5px 5px 5px var(--shadow-container-color);
     border-radius: 3px;
 }
 
@@ -22,7 +22,7 @@
     font-size: 2rem;
     font-weight: 700;
     cursor: default;
-    color: #00363a;
+    color: var(--primary-dark);
 }
 
 .register-box .register-form {
@@ -35,7 +35,7 @@
     width: 300px;
     justify-self: center;
     color: #00363a;
-    box-shadow: 3px 3px 3px #006064;
+    box-shadow: 3px 3px 3px var(--shadow-input-form);
     border: 0;
     border-radius: 3px;
     padding: 5px;
@@ -45,7 +45,7 @@
     align-self: center;
     justify-self: center;
     color: #fff;
-    background-color: #006064;
+    background-color: var(--secondary);
     font-weight: 700;
     padding: 10px 20px;
     cursor: pointer;
@@ -55,17 +55,17 @@
 
 .register-box .register-btn:hover {
     transform: scale(1.05);
-    background-color: #00363a;
+    background-color: var(--primary-dark);
 }
 
 .register-box .login-text {
     justify-self: center;
     align-self: center;
-    color: #00363a;
+    color: var(--primary-dark);
 }
 
 .login-text a {
-    color: #005661;
+    color: var(--link-color);
 }
 
 @media only screen and (max-width: 768px) {
