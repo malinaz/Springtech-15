@@ -85,6 +85,7 @@ function renderPostsList() {
 }
 
 function setPostEvents() {
+  // like
   $('.post-like-btn').on('click', function(event) {
     const postIndex = $(event.target).parent().parent().index();
     const postItem = posts[postIndex];
@@ -92,15 +93,60 @@ function setPostEvents() {
     if (activeUser.likedPosts.includes(postItem._id)) {
       postItem.likes--;
       activeUser.likedPosts = activeUser.likedPosts.filter(postId => postId != postItem._id);
-      sendUpdateUserRequest(activeUser);
     } else {
       postItem.likes++;
       activeUser.likedPosts.push(postItem._id);
-      sendUpdateUserRequest(activeUser);
     }
 
+    sendUpdateUserRequest(activeUser);
     sendUpdatePostRequest(postItem);
+  });
+
+  // save
+  $('.post-save-btn').on('click', function(event) {
+    const postIndex = $(event.target).parent().parent().index();
+    const postItem = posts[postIndex];
+
+    if (!activeUser.savedPosts.includes(postItem._id)) {
+      activeUser.savedPosts.push(postItem._id);
+      sendUpdateUserRequest(activeUser);
+    }
+  });
+
+  // more options
+  $('.post-options-btn').on('click', function(event) {
+    const postItem = $(event.target).parent().parent();
+
+    if ($(postItem).has('.options-list').length != 0) {
+      postItem.children('.options-list').remove();
+    } else {
+      renderOptionsMenu(postItem);
+      setOptionsMenuEvents();
+    }
+  });
+}
+
+function setOptionsMenuEvents() {
+  $('.option-delete').on('click', function(event) {
+    const postIndex = $(event.target).parent().parent().index();
+    const postItem = posts[postIndex];
+
+    sendDeletePostRequest(postItem);
   })
+}
+
+function sendDeletePostRequest(post) {
+  $.ajax({
+    url: 'http://localhost:3000/api/post/id/' + post._id,
+    type: 'DELETE',
+    success: function (result) {
+        console.log(result);
+        sendGetAllPostsRequest();
+    },
+    error: function (error) {
+        console.log(error);
+    }
+  });
 }
 
 function sendUpdateUserRequest(user) {
@@ -116,7 +162,7 @@ function sendUpdateUserRequest(user) {
     error: function (error) {
         console.log(error);
     }
-});
+  });
 }
 
 function sendUpdatePostRequest(post) {
