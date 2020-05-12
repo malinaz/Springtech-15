@@ -32,7 +32,7 @@ const postsDatastore = {
     },
 
     getAll: (success, fail) => {
-        Post.find()
+        Post.find().populate('userId')
             .then((data) => {
                 success(data);
             }).catch((error) => {

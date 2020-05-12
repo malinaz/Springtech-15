@@ -8,7 +8,7 @@ postsRouter.route('/all').get(getAllPosts);
 postsRouter.route('/:id').get(getPostById);
 
 
-postsRouter.route('').post(makePost);
+postsRouter.route('/').post(makePost);
 postsRouter.route('/id/:id').get(getPosts);
 postsRouter.route('/id/:id').delete(deletePost);
 postsRouter.route('/id/:id').put(putPost);

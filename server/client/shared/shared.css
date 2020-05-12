@@ -4,10 +4,10 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #fcfcfc;
+    background-color: #f0f0f0;
 }
 
-h1 {
+h1, p {
     font-size: medium;
     font-weight: normal;
     margin: 0;
@@ -118,5 +118,67 @@ a {
 
     .nav-list .list-item:last-child {
         margin: 0;
+    }
+}
+
+/* POST CSS */
+.posts-list {
+    display: grid;
+    row-gap: 20px;
+}
+
+.posts-list .post-item {
+    display: grid;
+    grid-template-rows: auto minmax(50px, auto) auto;
+    border: 2px solid #006978;
+    padding: 5px 10px;
+    row-gap: 20px;
+    box-sizing: border-box;
+}
+
+.post-item .post-author {
+    font-size: 1.5rem;
+    align-self: flex-start;
+    color: #005662;
+}
+
+.post-item .post-text {
+    padding: 0 10px;
+}
+
+.post-item .post-actions {
+    justify-self: end;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: 5px;
+}
+
+.post-actions > * {
+    background-color: #00838f;
+    padding: 5px 20px;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.post-actions > *:hover {
+    background-color: #005662;
+}
+
+.posts-list .dashed-border {
+    border: 2px dashed #005662;
+}
+
+@media only screen and (max-width: 768px) {
+    .post-item .post-author {
+        justify-self: center;
+    }
+
+    .post-item .post-actions {
+        justify-self: center;
+        column-gap: 1px;
     }
 }

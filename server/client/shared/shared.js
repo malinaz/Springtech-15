@@ -30,3 +30,25 @@ function setNabvarEvents() {
         }
     })
 }
+
+function renderPost(post) {
+    let postItem = $('<div></div>').addClass('post-item');
+    const postAuthor = $('<div></div>').addClass('post-author').text(post.userId.fullName);
+    const text = $('<p></p>').text(post.text);
+    const postText = $('<div></div>').addClass('post-text');
+    let postActions = $('<div></div>').addClass('post-actions');
+    const postLikeBtn = $('<button></button>').addClass('post-like-btn').text('Like ' + post.likes);
+    const postSaveBtn = $('<button></button>').addClass('post-save-btn').text('Save');
+    const postCommentsBtn = $('<button></button>').addClass('post-comments-btn').text('Comment ' + post.comments.length);
+
+    postText.append(text);
+    postActions.append(postLikeBtn, postCommentsBtn, postSaveBtn);
+    postItem.append(postAuthor, postText, postActions);
+
+    if (post.userId._id == localStorage.getItem('userId')) {
+        postItem.addClass('dashed-border');
+    }
+
+    $('.posts-list').append(postItem);
+
+}
