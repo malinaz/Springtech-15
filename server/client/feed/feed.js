@@ -85,5 +85,54 @@ function renderPostsList() {
 }
 
 function setPostEvents() {
+  $('.post-like-btn').on('click', function(event) {
+    const postIndex = $(event.target).parent().parent().index();
+    const postItem = posts[postIndex];
 
+    if (activeUser.likedPosts.includes(postItem._id)) {
+      postItem.likes--;
+      activeUser.likedPosts = activeUser.likedPosts.filter(postId => postId != postItem._id);
+      sendUpdateUserRequest(activeUser);
+    } else {
+      postItem.likes++;
+      activeUser.likedPosts.push(postItem._id);
+      sendUpdateUserRequest(activeUser);
+    }
+
+    sendUpdatePostRequest(postItem);
+  })
+}
+
+function sendUpdateUserRequest(user) {
+  $.ajax({
+    url: 'http://localhost:3000/api/user/' + user._id,
+    type: 'PUT',
+    data: JSON.stringify(user),
+    contentType: "application/json; charset=utf-8",
+    success: function (result) {
+        console.log(result);
+        activeUser = result;
+    },
+    error: function (error) {
+        console.log(error);
+    }
+});
+}
+
+function sendUpdatePostRequest(post) {
+  console.log(post);
+
+  $.ajax({
+    url: 'http://localhost:3000/api/post/id/' + post._id,
+    type: 'PUT',
+    data: JSON.stringify(post),
+    contentType: "application/json; charset=utf-8",
+    success: function (result) {
+        console.log(result);
+        sendGetAllPostsRequest();
+    },
+    error: function (error) {
+        console.log(error);
+    }
+  });
 }

@@ -11,7 +11,7 @@ postsRouter.route('/:id').get(getPostById);
 postsRouter.route('/').post(makePost);
 postsRouter.route('/id/:id').get(getPosts);
 postsRouter.route('/id/:id').delete(deletePost);
-postsRouter.route('/id/:id').put(putPost);
+postsRouter.route('/id/:id').put(updatePost);
 
 function makePost(request, response) {
     const value = request.body;
@@ -22,11 +22,11 @@ function makePost(request, response) {
     });
 }
 
-function putPost(request, response) {
+function updatePost(request, response) {
     const id = request.params.id;
-    const value = request.body.text;
+    const newPost = request.body;
 
-    postsDatastore.updatePost(id, value, (data) => {
+    postsDatastore.updateById(id, newPost, (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
