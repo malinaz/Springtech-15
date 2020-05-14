@@ -33,7 +33,7 @@ function getInitials(user){
         firstNameLetter = acronymList[0].toUpperCase();
         lastNameLetter = '';
     }
-    
+
     return firstNameLetter+lastNameLetter;
 }
 
@@ -125,7 +125,6 @@ function selectElement(element) {
 
 function getUser() {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -134,16 +133,17 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                console.log(data);
                 createProfilePage(data);
                 displayMyPosts();
             },
+            error: function(error){
+                toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+            }
         });
     }
 }
 
-function displayMyPosts(){
-
+function displayMyPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -152,12 +152,13 @@ function displayMyPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 }
 
 function constructPostElement(onePost) {
-
-    //console.log(onePost);
     const photoContainer = $('<div></div>').addClass(
         'post-author-picture-container'
     );
@@ -189,15 +190,13 @@ function constructPostElement(onePost) {
     postElement.append(commentCount);
 
     return postElement;
-
 }
 
-function renderPosts(postList){
-
+function renderPosts(postList) {
     const postsContent = $('.posts-content');
     postsContent.empty();
-    if (postList.length > 0){
-        for (let post of postList){
+    if (postList.length > 0) {
+        for (let post of postList) {
             postsContent.append(constructPostElement(post));
         }
     } else {
@@ -209,8 +208,7 @@ function renderPosts(postList){
     }
 }
 
-function displayLikedPosts(){
-
+function displayLikedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -219,12 +217,13 @@ function displayLikedPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
-
 }
 
-function displaySavedPosts(){
-
+function displaySavedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -233,11 +232,15 @@ function displaySavedPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
-
 }
 
 $(() => {
     // shared
-    profile();
+    checkPagePermission(() => {
+        profile();
+    });
 });

@@ -16,7 +16,6 @@ userRouter.route("/delete-friend/:myId/:friendId").get(deleteFriendRequest);
 
 function createNew(req, res) {
   const user = req.body;
-
   userDatastore.createNew(
     user,
     (data) => {
