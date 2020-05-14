@@ -33,7 +33,7 @@ function getInitials(user){
         firstNameLetter = acronymList[0].toUpperCase();
         lastNameLetter = '';
     }
-    
+
     return firstNameLetter+lastNameLetter;
 }
 
@@ -145,8 +145,7 @@ function getUser() {
     }
 }
 
-function displayMyPosts(){
-
+function displayMyPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -162,7 +161,6 @@ function displayMyPosts(){
 }
 
 function constructPostElement(onePost) {
-
     //console.log(onePost);
     const photoContainer = $('<div></div>').addClass(
         'post-author-picture-container'
@@ -195,15 +193,13 @@ function constructPostElement(onePost) {
     postElement.append(commentCount);
 
     return postElement;
-
 }
 
-function renderPosts(postList){
-
+function renderPosts(postList) {
     const postsContent = $('.posts-content');
     postsContent.empty();
-    if (postList.length > 0){
-        for (let post of postList){
+    if (postList.length > 0) {
+        for (let post of postList) {
             postsContent.append(constructPostElement(post));
         }
     } else {
@@ -215,8 +211,7 @@ function renderPosts(postList){
     }
 }
 
-function displayLikedPosts(){
-
+function displayLikedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -229,11 +224,9 @@ function displayLikedPosts(){
             toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
         }
     });
-
 }
 
-function displaySavedPosts(){
-
+function displaySavedPosts() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
@@ -246,10 +239,11 @@ function displaySavedPosts(){
             toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
         }
     });
-
 }
 
 $(() => {
     // shared
-    profile();
+    checkPagePermission(() => {
+        profile();
+    });
 });

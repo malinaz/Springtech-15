@@ -33,14 +33,13 @@ function sendCreateRequest(user) {
         data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
-            //console.log(result);
-            //alert("Successfully created new user. You can log in now !");
-            toastr['success']('You can log in now!', 'Successfully Registered', toastrOptions);
+            console.log(result);
+            alert("Successfully created new user. You can log in now !");
+            window.location = '/login';
         },
         error: function (error) {
-            //console.log(error);
-            //alert("Username is already taken !!!");
-            toastr['error']('Username is already taken!', 'Registration Failure', toastrOptions);
+            console.log(error);
+            alert("Username or Email is already taken !!!");
         }
     });
 }
