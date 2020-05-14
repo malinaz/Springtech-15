@@ -49,6 +49,24 @@ function renderNavbar() {
     setNabvarEvents();
 }
 
+var toastrOptions = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "10000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+
 function setNabvarEvents() {
     $('.list-item').on('click', function(event) {
         const target = $(event.target);
@@ -114,5 +132,3 @@ function checkIsLoggedIn(success, fail) {
 function checkPagePermission(success) {
     checkIsLoggedIn(success, () => (window.location = '/login'));
 }
-
-

@@ -122,7 +122,8 @@ p {
 .post-element .post-text-content {
     font-size: 20px;
     width: 100%;
-    margin-bottom: 5px;white-space: pre-wrap;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
 }
 
 .post-element .post-like-count, .post-element .post-comment-count {
