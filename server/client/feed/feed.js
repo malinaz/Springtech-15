@@ -304,6 +304,7 @@ function sendUpdatePostRequest(post) {
     data: JSON.stringify(post),
     contentType: "application/json; charset=utf-8",
     success: function (result) {
+        toastr['success']('Updated post!', 'Success', toastrOptions);
         sendGetAllPostsRequest();
     },
     error: function (error) {
