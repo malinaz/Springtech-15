@@ -9,7 +9,7 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: 50px auto;
-  background-color: #006064;
+  background-color: var(--secondary);
 }
 
 button {
@@ -21,7 +21,7 @@ button {
 }
 
 .container .content {
-  background-color: #00838e;
+  background-color: var(--primary);
   height: auto;
   margin: 0 auto;
   width: 75%;
@@ -33,7 +33,7 @@ button {
 .container .content .add-post {
   width: 75%;
   display: flex;
-  background-color: #4fb3be;
+  background-color: var(--primary-light);
   margin: 0 auto;
   margin-top: 20px;
 }
@@ -51,7 +51,7 @@ button {
 .container .content .posts-list .post-element button,
 .container .update-popup .update-div button {
   border-radius: 10px;
-  background-color: #00838e;
+  background-color: var(--primary);
   color: white;
   padding: 5px 10px;
   margin: auto auto;
@@ -64,7 +64,7 @@ button {
 }
 .container .content .posts-list .post-element {
   background-color: white;
-  color: #00838e;
+  color: var(--primary);
   font-weight: bold;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -102,7 +102,7 @@ button {
 
 .container .content .posts-list .post-element .fas.fa-ellipsis-v {
   background-color: #ffffff;
-  color: #00838e;
+  color: var(--primary);
   margin: 0 0 auto auto;
   border: none;
   font-size: 25px;
@@ -125,7 +125,7 @@ button {
 }
 .container  .update-div,
 .container  .delete-div {
-  background-color: #00838e;
+  background-color: var(--primary);
   opacity: 1;
   color: white;
   border-radius: 10px;
@@ -150,6 +150,6 @@ button {
 .container  .update-div button,
 .container .delete-div button {
   background-color: #ffffff;
-  color: #00838e;
+  color: var(--primary);
   margin: 10px 10px 0 0;
 }
