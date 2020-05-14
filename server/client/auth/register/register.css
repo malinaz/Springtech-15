@@ -70,6 +70,7 @@
 
 @media only screen and (max-width: 768px) {
     .register-box {
-      width: auto;
+        width: auto;
+        margin: 150px auto auto auto;
     }
   }
