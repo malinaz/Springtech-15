@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
     gender: { type: String, enum: ['male', 'female'] },
     likedPosts: [{ type: mongoose.Types.ObjectId, ref: 'posts' }],
     savedPosts: [{ type: mongoose.Types.ObjectId, ref: 'posts' }],
+    myFriends: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    friendsRequest: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
 
 });
 
