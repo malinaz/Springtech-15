@@ -125,7 +125,7 @@ function selectElement(element) {
 
 function getUser() {
     const userId = localStorage.getItem('userId');
-    //console.log(userId);
+    console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -134,7 +134,7 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                //console.log(data);
+                console.log(data);
                 createProfilePage(data);
                 displayMyPosts();
             },
