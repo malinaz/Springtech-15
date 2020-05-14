@@ -33,12 +33,14 @@ function sendCreateRequest(user) {
         data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
         success: function (result) {
-            console.log(result);
-            alert("Successfully created new user. You can log in now !");
+            //console.log(result);
+            //alert("Successfully created new user. You can log in now !");
+            toastr['success']('You can log in now!', 'Successfully Registered', toastrOptions);
         },
         error: function (error) {
-            console.log(error);
-            alert("Username is already taken !!!");
+            //console.log(error);
+            //alert("Username is already taken !!!");
+            toastr['error']('Username is already taken!', 'Registration Failure', toastrOptions);
         }
     });
 }
@@ -50,19 +52,23 @@ function validForm(user) {
                 if (user.email.includes('@') && user.email.includes('.')) {
                     return true;
                 } else {
-                    alert('Please insert a valid email address !');
+                    //alert('Please insert a valid email address !');
+                    toastr['error']('Please insert a valid email address!', 'Registration Failure', toastrOptions);
                     return false;
                 }
             } else {
-                alert('Password must contain at least 4 characters');
+                //alert('Password must contain at least 4 characters');
+                toastr['error']('Password must contain at least 4 characters!', 'Registration Failure', toastrOptions);
                 return false;
             }
         } else {
-            alert('Username must contain at least 4 characters');
+            //alert('Username must contain at least 4 characters');
+            toastr['error']('Username must contain at least 4 characters', 'Registration Failure', toastrOptions);
             return false;
         }
     } else {
-        alert('Full Name must contain at least 4 characters');
+        //alert('Full Name must contain at least 4 characters');
+        toastr['error']('Full Name must contain at least 4 characters', 'Registration Failure', toastrOptions);
         return false;
     }
 }

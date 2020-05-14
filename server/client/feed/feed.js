@@ -32,7 +32,8 @@ function buildContent() {
   const addPostBtn = $("<button>", "</button>");
   addPostBtn.text("Add");
   addPostBtn.on("click", () => {
-    console.log("Post added !");
+    //console.log("Post added !");
+    toastr['success']('Other people can now see your post!', 'Post added', toastrOptions);
   });
 
   addPost.append(inputPost, addPostBtn);
@@ -47,7 +48,7 @@ function buildContent() {
 function getAllPosts() {
   getAll( (response) => {
     if (response) {
-      console.log(posts);
+      //console.log(posts);
       renderPostsList();
     }
   })
@@ -61,7 +62,7 @@ function renderPostsList() {
   for (let i = 0; i < posts.length; i++) {
     postsList.append(createNewPost(posts[i]));
   }
-  console.log(postsList);
+  //console.log(postsList);
   content.append(postsList);
 }
 
@@ -106,7 +107,8 @@ function createNewPost(post) {
       btnUpdate.text("Update");
       btnUpdate.on("click", () => {
         //update post in the database
-        console.log("Post updated 2");
+        //console.log("Post updated 2");
+        toastr['success']('Your post has been successfully updated', 'Post Updated', toastrOptions);
       });
 
       const closeBtn = $("<button>", "</button>");
@@ -127,7 +129,7 @@ function createNewPost(post) {
     deletePost.text("Delete post");
     deletePost.addClass("crud-option");
     deletePost.on("click", () => {
-      console.log("post deleted !");
+      //console.log("post deleted !");
 
       const deletePopup = $("<div>", "</div>");
       deletePopup.addClass("delete-popup");
@@ -146,6 +148,7 @@ function createNewPost(post) {
         //delete post from the database
         $("#delete-div").remove();
         $("#delete-popup").remove();
+        toastr['success']('your post has been removed!', 'Post Deleted', toastrOptions);
       });
 
       const btnNo = $("<button>", "</button>");
@@ -154,6 +157,7 @@ function createNewPost(post) {
         // do NOT delete post from the database
         $("#delete-div").remove();
         $("#delete-popup").remove();
+        toastr['info']('You have canceled the action!', 'Post Not Removed', toastrOptions);
       });
       deleteDiv.append(message, btnYes, btnNo);
 
@@ -234,7 +238,8 @@ function manageLikeButton(userId, postId, callback) {
       callback(response);
     },
     error: function (error) {
-      console.log(error);
+      //console.log(error);
+      toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
     }
   });
 }
@@ -249,7 +254,8 @@ function getPostById(postId, callback) {
       callback(response);
     },
     error: function (error) {
-      console.log(error);
+      //console.log(error);
+      toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
     }
   });
 }
@@ -265,7 +271,8 @@ function getAll(callback) {
       callback(response);
     },
     error: function (error) {
-      console.log(error);
+      //console.log(error);
+      toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
     }
   });
 }

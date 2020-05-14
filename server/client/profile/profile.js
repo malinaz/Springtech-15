@@ -125,7 +125,7 @@ function selectElement(element) {
 
 function getUser() {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
+    //console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -134,10 +134,13 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                console.log(data);
+                //console.log(data);
                 createProfilePage(data);
                 displayMyPosts();
             },
+            error: function(error){
+                toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+            }
         });
     }
 }
@@ -152,6 +155,9 @@ function displayMyPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 }
 
@@ -219,6 +225,9 @@ function displayLikedPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 
 }
@@ -233,6 +242,9 @@ function displaySavedPosts(){
         contentType: 'application/json',
         dataType: 'json',
         success: renderPosts,
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 
 }
