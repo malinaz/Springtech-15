@@ -3,15 +3,24 @@ function profile() {
     getUser();
 }
 
-function createProfilePage(user) {
-    const body = $('body');
-    const profileMain = $('<div></div>').addClass('profile-main');
-    const profileContainer = $('<div></div>').addClass('profile-container');
-    const userDetails = $('<div></div>').addClass('user-details');
-    const profilePosts = $('<div></div>').addClass('profile-posts-section');
-    const postsHeader = $('<div></div>').addClass('posts-header');
-    const postsContent = $('<div></div>').addClass('posts-content');
+var user;
 
+function createProfilePage(userData) {
+
+    user = userData;
+
+    const body = $('body');
+    const profileContainer = $('<div></div>').addClass('profile-container');
+    const profileMain = $('<div></div>').addClass('profile-main');
+
+    renderProfile(profileContainer);
+    renderPostArea(profileContainer);
+
+    profileMain.append(profileContainer);
+    body.append(profileMain);
+}
+
+function getInitials(user){
     const acronymList = user.fullName.match(/\b\w/g);
 
     let firstNameLetter;
@@ -25,18 +34,25 @@ function createProfilePage(user) {
         lastNameLetter = '';
     }
 
-    const photoContainer = $('<div></div>').addClass(
-        'profile-picture-container'
-    );
+    return firstNameLetter+lastNameLetter;
+}
 
+function createPhoto(photoContainer) {
     const photo = $('<div></div>').addClass('profile-picture');
-
     const photoName = $('<div></div>').addClass('photo-name');
 
-    photoName.html(`${firstNameLetter}${lastNameLetter}`);
+    photoName.html(`${getInitials(user)}`);
     photo.append(photoName);
 
     photoContainer.append(photo);
+}
+
+function renderProfile(profileContainer){
+
+    const userDetails = $('<div></div>').addClass('user-details');
+
+    const photoContainer = $('<div></div>').addClass('profile-picture-container');
+    createPhoto(photoContainer);
 
     const userInfo = $('<div></div>').addClass('user-info');
     const name = $('<p></p>').addClass('user-name');
@@ -44,9 +60,29 @@ function createProfilePage(user) {
     const email = $('<p></p>').addClass('email');
     const gender = $('<p></p>').addClass('genre');
 
-    const myPosts = $('<div></div>').addClass(
-        'profile-posts my-posts selected'
-    );
+    name.html(user.fullName);
+    username.html(user.username);
+    email.html(user.email);
+    gender.html(user.gender);
+
+    userInfo.append(name);
+    userInfo.append(username);
+    userInfo.append(email);
+    userInfo.append(gender);
+
+    userDetails.append(photoContainer);
+    userDetails.append(userInfo);
+
+    profileContainer.append(userDetails);
+}
+
+function renderPostArea(profileContainer){
+
+    const profilePosts = $('<div></div>').addClass('profile-posts-section');
+    const postsHeader = $('<div></div>').addClass('posts-header');
+    const postsContent = $('<div></div>').addClass('posts-content');
+
+    const myPosts = $('<div></div>').addClass('profile-posts my-posts selected');
     const likedPosts = $('<div></div>').addClass('profile-posts liked-posts');
     const savedPosts = $('<div></div>').addClass('profile-posts liked-posts');
 
@@ -73,27 +109,9 @@ function createProfilePage(user) {
     postsHeader.append(likedPosts);
     postsHeader.append(savedPosts);
 
-    name.html(user.fullName);
-    username.html(user.username);
-    email.html(user.email);
-    gender.html(user.gender);
-
-    userInfo.append(name);
-    userInfo.append(username);
-    userInfo.append(email);
-    userInfo.append(gender);
-
-    userDetails.append(photoContainer);
-    userDetails.append(userInfo);
-
-    profileContainer.append(userDetails);
-
     profilePosts.append(postsHeader);
     profilePosts.append(postsContent);
     profileContainer.append(profilePosts);
-
-    profileMain.append(profileContainer);
-    body.append(profileMain);
 }
 
 function deselectAll() {
@@ -107,7 +125,7 @@ function selectElement(element) {
 
 function getUser() {
     const userId = localStorage.getItem('userId');
-    //console.log(userId);
+    console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -116,7 +134,7 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                //console.log(data);
+                console.log(data);
                 createProfilePage(data);
                 displayMyPosts();
             },
@@ -138,17 +156,6 @@ function displayMyPosts() {
 
 function constructPostElement(onePost) {
     //console.log(onePost);
-
-    const acronymList = onePost.userId.fullName.match(/\b\w/g);
-    let firstNameLetter;
-    let lastNameLetter;
-    if (acronymList.length > 1) {
-        firstNameLetter = acronymList[0].toUpperCase();
-        lastNameLetter = acronymList[1].toUpperCase();
-    } else {
-        firstNameLetter = acronymList[0].toUpperCase();
-        lastNameLetter = '';
-    }
     const photoContainer = $('<div></div>').addClass(
         'post-author-picture-container'
     );
@@ -157,7 +164,7 @@ function constructPostElement(onePost) {
 
     const photoName = $('<div></div>').addClass('post-author-photo-name');
 
-    photoName.html(`${firstNameLetter}${lastNameLetter}`);
+    photoName.html(`${getInitials(onePost.userId)}`);
     photo.append(photoName);
 
     photoContainer.append(photo);
