@@ -115,14 +115,102 @@ function setPostEvents() {
 
   // more options
   $('.post-options-btn').on('click', function(event) {
-    const postItem = $(event.target).parent().parent();
+    const postElement = $(event.target).parent().parent();
 
-    if ($(postItem).has('.options-list').length != 0) {
-      postItem.children('.options-list').remove();
+    if ($(postElement).has('.options-list').length != 0) {
+      postElement.children('.options-list').remove();
     } else {
-      renderOptionsMenu(postItem);
+      renderOptionsMenu(postElement);
       setOptionsMenuEvents();
     }
+  });
+
+  // comment
+  $('.post-comments-btn').on('click', function(event) {
+    const postElement = $(event.target).parent().parent();
+    const postItem = posts[postElement.index()];
+
+    if ($(postElement).has('.comment-section').length != 0) {
+      postElement.children('.comment-section').remove();
+    } else {
+      renderCommentSection(postElement, postItem);
+    }
+  })
+}
+
+function renderCommentSection(htmlElement, post) {
+  let commentSection =  $('<div></div>').addClass('comment-section');
+  let addNewComment = $('<div></div>').addClass('section-add-comment');
+  let commentsList = $('<div></div>').addClass('section-comments-list');
+  const input = $('<input>').addClass('add-comment-input').attr('type', 'text').attr('placeholder', 'Write a comment...');
+  const addCommentBtn = $('<button></button>').addClass('add-comment-btn').text('Add');
+
+  addNewComment.append(input, addCommentBtn);
+  commentSection.append(addNewComment, commentsList);
+
+  htmlElement.append(commentSection);
+  sendGetPostCommentsRequest(htmlElement, post);
+  setCommentSectionEvents(htmlElement, post);
+}
+
+function setCommentSectionEvents(htmlElement, post) {
+  $('.add-comment-btn').on('click', function() {
+    const text = htmlElement.children('.comment-section').children('.section-add-comment').children('.add-comment-input').val();
+    console.log(text);
+
+    const comment = {
+      text: text,
+      postId: post._id,
+      userId: activeUser._id
+    };
+
+    if (comment.text.trim() != 0) {
+      post.comments.push(comment);
+      sendAddCommentRequest(comment);
+      sendUpdatePostRequest(post);
+    }
+  });
+}
+
+function sendAddCommentRequest(comment) {
+  $.ajax({
+    url: 'http://localhost:3000/api/comment/',
+    type: 'POST',
+    data: JSON.stringify(comment),
+    contentType: "application/json; charset=utf-8",
+    success: function (result) {
+        console.log(result);
+    },
+    error: function (error) {
+        console.log(error);
+    }
+  });
+}
+
+function sendGetPostCommentsRequest(htmlElement, post) {
+  $.ajax({
+    url: 'http://localhost:3000/api/comment/id/' + post._id,
+    type: 'GET',
+    success: function (result) {
+        const comments = result;
+        renderCommentsList(htmlElement, comments);
+    },
+    error: function (error) {
+        console.log(error);
+    }
+  });
+}
+
+function renderCommentsList(htmlElement, comments) {
+  const commentsReversed = comments.reverse();
+
+  commentsReversed.forEach(comment => {
+    let commentItem = $('<div></div>').addClass('comment-item');
+    const commentAuthor = $('<div></div>').addClass('comment-author').text(comment.userId.username);
+    const commentText = $('<div></div>').addClass('comment-text').text(comment.text);
+
+    commentItem.append(commentAuthor, commentText);
+    htmlElement.children('.comment-section').children('.section-comments-list').append(commentItem);
   });
 }
 
@@ -132,7 +220,53 @@ function setOptionsMenuEvents() {
     const postItem = posts[postIndex];
 
     sendDeletePostRequest(postItem);
-  })
+  });
+
+  $('.option-update').on('click', function(event) {
+    const postIndex = $(event.target).parent().parent().index();
+    const postItem = posts[postIndex];
+
+    renderUpdateForm(postItem);
+  });
+}
+
+function renderUpdateForm(post) {
+  let editForm = $('<div></div>').addClass('edit-form');
+  const overlay = $('<div></div>').addClass('overlay');
+  let formBox = $('<div></div>').addClass('form-box');
+  const input = $('<textarea></textarea').addClass('edit-input').val(post.text).attr('rows', '5');
+  let formOptions = $('<div></div>').addClass('form-options');
+  const updateBtb = $('<button></button>').addClass('update-btn').text('Update');
+  const cancelBtb = $('<button></button>').addClass('cancel-btn').text('Cancel');
+
+  formOptions.append(updateBtb, cancelBtb)
+  formBox.append(input, formOptions)
+  editForm.append(overlay, formBox);
+
+  const topScroll = $(window).scrollTop();
+
+  editForm.css("top", topScroll+'px');
+
+  $('body').append(editForm);
+  $('body').addClass('noscroll');
+
+  setUpdateFormEvents(post);
+}
+
+function setUpdateFormEvents(post) {
+  $('.cancel-btn').on('click', function() {
+    $('.edit-form').remove();
+    $('body').removeClass('noscroll');
+  });
+
+  $('.update-btn').on('click', function() {
+    const newText = $('.edit-input').val();
+    post.text = newText;
+
+    sendUpdatePostRequest(post);
+    $('.edit-form').remove();
+    $('body').removeClass('noscroll');
+  });
 }
 
 function sendDeletePostRequest(post) {
@@ -166,8 +300,6 @@ function sendUpdateUserRequest(user) {
 }
 
 function sendUpdatePostRequest(post) {
-  console.log(post);
-
   $.ajax({
     url: 'http://localhost:3000/api/post/id/' + post._id,
     type: 'PUT',

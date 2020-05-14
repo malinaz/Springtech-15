@@ -5,6 +5,7 @@ html, body {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f0f0;
+    position: relative;
 }
 
 h1, p {
@@ -210,5 +211,9 @@ a {
     .post-item .post-actions {
         justify-self: center;
         column-gap: 1px;
+    }
+
+    .post-item .options-list {
+        transform: translate(0, 100%);
     }
 }

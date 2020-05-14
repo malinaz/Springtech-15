@@ -23,7 +23,7 @@ const commentDatastore = {
     },
 
     getAllComments: (id, success, fail) => {
-        Comment.find({"postId": id})
+        Comment.find({"postId": id}).populate('userId')
             .then((data) => {
                 success(data);
             }).catch((error) => {

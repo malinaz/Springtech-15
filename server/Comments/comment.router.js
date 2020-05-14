@@ -2,7 +2,7 @@ const express = require('express');
 const commentRouter = express.Router();
 const commentDatastore = require('./comment.datastore');
 
-commentRouter.route('').post(postComment);
+commentRouter.route('/').post(postComment);
 commentRouter.route('/id/:id').get(getComments);
 commentRouter.route('/id/:id').delete(deleteComment);
 commentRouter.route('/id/:id').put(putComment);

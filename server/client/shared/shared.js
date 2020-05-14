@@ -33,7 +33,7 @@ function setNabvarEvents() {
 
 function renderPost(post) {
     let postItem = $('<div></div>').addClass('post-item');
-    const postAuthor = $('<div></div>').addClass('post-author').text(post.userId.fullName);
+    const postAuthor = $('<div></div>').addClass('post-author').text(post.userId.username);
     const text = $('<p></p>').text(post.text);
     const postText = $('<div></div>').addClass('post-text');
     let postActions = $('<div></div>').addClass('post-actions');
