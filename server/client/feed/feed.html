@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/shared/shared.css">
     <link href="feed.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/shared/shared.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/shared/toastr.css">
+    <script type="text/javascript" src="/shared/toastr.js"></script>
+    <script src="/shared/shared.js"></script>
     <script src="feed.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <title>Document</title>
+    <title>News Feed</title>
 </head>
 <body>
-  <div class="container" id="container"></div>
+  <div class="container">
+    <div class="content">
+      <div class="section-add-new">
+        <textarea rows="5" class="post-input" placeholder="Write a new post"></textarea>
+        <button class="btn-add-new">Add New Post</button>
+      </div>
+      <div class="section-latest-posts">
+        <h1 class="list-title">Latest Posts Added</h1>
+        <div class="posts-list"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

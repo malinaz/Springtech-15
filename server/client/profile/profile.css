@@ -26,7 +26,7 @@ p {
     display: grid;
     grid-template-columns: 1fr 3fr;
     /*grid-column-gap: 30px; */
-    box-shadow: 6px 5px 9px -5px #8a868a;
+    box-shadow: 6px 5px 9px -5px var(--shadow-container-color);
 }
 
 .profile-posts-section {
@@ -34,7 +34,7 @@ p {
     grid-row: 2;
     margin-bottom: 10px;
     background-color: white;
-    box-shadow: 6px 5px 9px -5px #8a868a;
+    box-shadow: 6px 5px 9px -5px var(--shadow-container-color);
     display: grid;
     grid-template-rows: 50px 1fr;
     height: fit-content;
@@ -50,13 +50,13 @@ p {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    background-color: #00838e;
+    background-color: var(--primary);
     color: white;
     font-size: 25px;
 }
 
 .profile-posts.selected {
-    background-color: #00363a;
+    background-color: var(--secondary-dark);
 }
 
 .profile-posts:hover, .post-element .post-like-count:hover, .post-element .post-comment-count:hover {
@@ -75,12 +75,12 @@ p {
 .profile-picture {
     grid-column: 1;
     border-radius: 50%;
-    background-color: #006064;
+    background-color: var(--secondary);
     width: 150px;
     height: 150px;
     align-self: center;
     justify-self: center;
-    border: 3px solid #00363a;
+    border: 3px solid var(--secondary-dark);
     position: relative;
 }
 
@@ -122,14 +122,15 @@ p {
 .post-element .post-text-content {
     font-size: 20px;
     width: 100%;
-    margin-bottom: 5px;white-space: pre-wrap;
+    margin-bottom: 5px;
+    white-space: pre-wrap;
 }
 
 .post-element .post-like-count, .post-element .post-comment-count {
     padding: 2px;
-    background-color: #006064;
+    background-color: var(--secondary);
     color: white;
-    border: 1px solid #00363a;
+    border: 1px solid var(--secondary-dark);
     margin-right: 20px;
     font-size: 15px;
 }
@@ -143,8 +144,8 @@ p {
 
 .post-author-profile-picture {
     border-radius: 50%;
-    background-color: #006064;
-    border: 1px solid #00363a;
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary-dark);
     position: relative;
     width: 28px;
     height: 28px;
