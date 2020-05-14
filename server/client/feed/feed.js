@@ -20,7 +20,7 @@ function sendGetUserByIdRequest() {
         activeUser = result;
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Failed to retrieve user data!', 'Error', toastrOptions);
     }
   });
 }
@@ -34,7 +34,7 @@ function sendGetAllPostsRequest() {
         renderPostsList();
     },
     error: function (error) {
-        console.log(error);
+      toastr['error']('Failed to retrieve posts!', 'Error', toastrOptions);
     }
   });
 }
@@ -63,11 +63,11 @@ function sendAddPostRequest(postText) {
     data: JSON.stringify(post),
     contentType: "application/json; charset=utf-8",
     success: function (result) {
-        console.log(result);
+        toastr['success']('Post created successfully!', 'Success', toastrOptions);
         sendGetAllPostsRequest();
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Failed to create new post!', 'Error', toastrOptions);
     }
   });
 }
@@ -156,7 +156,6 @@ function renderCommentSection(htmlElement, post) {
 function setCommentSectionEvents(htmlElement, post) {
   $('.add-comment-btn').on('click', function() {
     const text = htmlElement.children('.comment-section').children('.section-add-comment').children('.add-comment-input').val();
-    console.log(text);
 
     const comment = {
       text: text,
@@ -179,10 +178,10 @@ function sendAddCommentRequest(comment) {
     data: JSON.stringify(comment),
     contentType: "application/json; charset=utf-8",
     success: function (result) {
-        console.log(result);
+        toastr['success']('Comment added successfully!', 'Success', toastrOptions);
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Could not add comment!', 'Error', toastrOptions);
     }
   });
 }
@@ -196,7 +195,7 @@ function sendGetPostCommentsRequest(htmlElement, post) {
         renderCommentsList(htmlElement, comments);
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Could not retrieve comment data!', 'Error', toastrOptions);
     }
   });
 }
@@ -274,11 +273,11 @@ function sendDeletePostRequest(post) {
     url: 'http://localhost:3000/api/post/' + post._id,
     type: 'DELETE',
     success: function (result) {
-        console.log(result);
+        toastr['success']('Post has been deleted!', 'Success', toastrOptions);
         sendGetAllPostsRequest();
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Could not delete post!', 'Error', toastrOptions);
     }
   });
 }
@@ -290,11 +289,10 @@ function sendUpdateUserRequest(user) {
     data: JSON.stringify(user),
     contentType: "application/json; charset=utf-8",
     success: function (result) {
-        console.log(result);
         activeUser = result;
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Could not complete operation!', 'Error', toastrOptions);
     }
   });
 }
@@ -306,11 +304,10 @@ function sendUpdatePostRequest(post) {
     data: JSON.stringify(post),
     contentType: "application/json; charset=utf-8",
     success: function (result) {
-        console.log(result);
         sendGetAllPostsRequest();
     },
     error: function (error) {
-        console.log(error);
+        toastr['error']('Could not complete operation!', 'Error', toastrOptions);
     }
   });
 }

@@ -125,7 +125,6 @@ function selectElement(element) {
 
 function getUser() {
     const userId = localStorage.getItem('userId');
-    //console.log(userId);
 
     if (userId) {
         $.ajax({
@@ -134,7 +133,6 @@ function getUser() {
             contentType: 'application/json',
             dataType: 'json',
             success: (data) => {
-                //console.log(data);
                 createProfilePage(data);
                 displayMyPosts();
             },
@@ -161,7 +159,6 @@ function displayMyPosts() {
 }
 
 function constructPostElement(onePost) {
-    //console.log(onePost);
     const photoContainer = $('<div></div>').addClass(
         'post-author-picture-container'
     );

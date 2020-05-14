@@ -23,7 +23,6 @@ function renderLogInPage() {
 		const password = logInPassword_input.val();
 
 		if(username === '' || password === '') {
-			//alert('All fields must be completed!');
 			toastr['error']('All fields must be completed!', 'Login Failure', toastrOptions);
 			return;
 		}
@@ -33,7 +32,6 @@ function renderLogInPage() {
 				localStorage.setItem('userId', user._id);
 				window.location.href='/feed';
 			} else {
-				//alert('Invalid username or password !')
 				toastr['error']('Invalid username or password!', 'Login Failure', toastrOptions);
 			}
 		})
@@ -51,7 +49,6 @@ function tryLogIn(username, password, callback) {
 			callback(response);
 		},
 		error: function (error) {
-			//console.log(error);
 			toastr['error']('A connection error has occured!', 'Connection Failure', toastrOptions);
 		}
 	});
