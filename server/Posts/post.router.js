@@ -6,9 +6,7 @@ const postsManager = require('./post.manager');
 
 postsRouter.route('/all').get(getAll);
 postsRouter.route('/:id').get(getById);
-
-
-postsRouter.route('').post(createPost);
+postsRouter.route('/').post(createPost);
 postsRouter.route('/:id').delete(deletePost);
 postsRouter.route('/:id').put(updatePost);
 
@@ -44,9 +42,9 @@ function createPost(request, response) {
 
 function updatePost(request, response) {
     const id = request.params.id;
-    const value = request.body.text;
+    const newPost = request.body;
 
-    postsDatastore.update(id, value, (data) => {
+    postsDatastore.updateById(id, newPost, (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);

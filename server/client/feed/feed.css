@@ -1,151 +1,192 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
-
 .container {
+  display: grid;
+}
+
+.content {
+  width: 75%;
   height: 100%;
+  justify-self: center;
   display: grid;
-  grid-template-rows: 50px auto;
-  background-color: var(--secondary);
-}
-
-button {
-  cursor: pointer;
-}
-
-.container .content {
-  background-color: var(--primary);
-  height: auto;
-  margin: 0 auto;
-  width: 75%;
-  display: grid;
-  grid-template-rows: 100px auto;
-  grid-row-gap: 50px;
-}
-
-.container .content .add-post {
-  width: 75%;
-  display: flex;
-  background-color: var(--primary-light);
-  margin: 0 auto;
-  margin-top: 20px;
-}
-.container .content .add-post input {
-  width: 75%;
-}
-.container .content .add-post input,
-button {
-  font-size: 20px;
-  padding: 5px;
-  margin: auto 0;
-  margin-left: 10px;
-}
-.container .content .add-post button,
-.container .content .posts-list .post-element button,
-.container .update-popup .update-div button {
-  border-radius: 10px;
-  background-color: var(--primary);
-  color: white;
-  padding: 5px 10px;
-  margin: auto auto;
-}
-.container .content .posts-list {
-  list-style: none;
-  margin: 0 auto;
-  width: 75%;
-  padding: 0;
-}
-.container .content .posts-list .post-element {
-  background-color: white;
-  color: var(--primary);
-  font-weight: bold;
-  border-radius: 10px;
+  grid-auto-rows: min-content;
+  margin-top: 10px;
   margin-bottom: 20px;
-  height: auto;
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
+  row-gap: 20px;
+  box-sizing: border-box;
 }
-.container .content .posts-list .post-element .text-post {
-  padding: 10px;
-  margin: 0px;
+
+.section-add-new {
+  display: grid;
+  grid-template-rows: auto 50px;
+  row-gap: 5px;
+  box-shadow: 5px 5px 10px #00363a;
+  padding: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.section-add-new .post-input {
+  resize: none;
+  border: 2px inset #006978;
+  font-size: 1.5rem;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.section-add-new .btn-add-new {
+  align-self: center;
+  justify-self: end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px 30px;
+  background-color: #00838f;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.section-add-new .btn-add-new:hover {
+  background-color: #005662;
+}
+
+.section-latest-posts {
+  display: grid;
+  grid-template-rows: minmax(50px, auto) auto;
+  row-gap: 30px;
+  box-shadow: 5px 5px 10px #00363a;
+  padding: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.section-latest-posts .list-title {
+  font-size: 2rem;
+  color: #005662;
+  align-self: center;
+  justify-self: center;
+  cursor: default;
+  font-weight: 700;
+}
+
+.edit-form {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: grid;
+}
+
+.edit-form .overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  background-color: #000;
+  z-index: 2;
+}
+
+.edit-form .form-box {
+  align-self: center;
+  justify-self: center;
   width: 75%;
-  height: auto;
-  text-align: start;
+  display: grid;
+  grid-template-rows: 150px 50px;
+  z-index: 3;
 }
-.container .content .posts-list .post-element input {
-  margin-left: 10px;
-  font-size: 15px;
-  padding: 3px;
-  width: 50%;
+
+.form-box .edit-input {
+  font-family: Arial, Helvetica, sans-serif;
+  resize: none;
+  border: 5px solid #005662;
+  padding: 5px;
+}
+
+.form-box .form-options {
+  justify-self: end;
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 10px;
+}
+
+.form-options > * {
+  background-color: #00838f;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.form-options > *:hover {
+  background-color: #005662;
+}
+
+.noscroll {
+  overflow: hidden;
+}
+
+.post-item .comment-section {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  row-gap: 20px;
+}
+
+.comment-section .section-add-comment {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.section-add-comment .add-comment-input {
+  resize: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.comment-section .add-comment-btn {
+  align-self: center;
+  justify-self: end;
+  font-size: 1rem;
+  background-color: #00838f;
+  color: #fff;
+  padding: 10px 30px;
+  cursor: pointer;
+  border: 0;
   border-radius: 5px;
 }
-.container .content .posts-list .post-element button {
-  margin: 0px 10px;
-  font-size: 15px;
-}
-.container .content .posts-list .post-element .details-btn {
-  width: 100%;
-  height: 35px;
-}
-.container .content .posts-list .post-element .details-btn button {
-  float: right;
-  margin: 2px;
+
+.section-comments-list > *:not(:last-child) {
+  margin-bottom: 20px;
 }
 
-.container .content .posts-list .post-element .fas.fa-ellipsis-v {
-  background-color: #ffffff;
-  color: var(--primary);
-  margin: 0 0 auto auto;
-  border: none;
-  font-size: 25px;
-}
-.container .content .posts-list .post-element .crud-operations {
-  width: 100%;
-  text-align: center;
-  display: none;
-}
-.container .content .posts-list .post-element .crud-option {
-  cursor: pointer;
-}
-.container .update-popup,
-.container .delete-popup {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  opacity: 0.7;
-}
-.container  .update-div,
-.container  .delete-div {
-  background-color: var(--primary);
-  opacity: 1;
-  color: white;
-  border-radius: 10px;
-  height: 150px;
-  width:270px;
-  font-size: 20px;
-  font-weight: bold;
-  position: fixed;
-  text-align: center;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 50%;
-}
-.container  .update-div input{
-  width: 75%;
+.section-comments-list .comment-item {
+  display: grid;
+  grid-template-rows: repeat(2,auto);
+  row-gap: 5px;
+  border-bottom: 1px solid #00838f;
+  padding: 10px;
 }
 
-.container  .update-div p,
-.container  .delete-div p {
-  padding: 0 5px;
+.comment-item .comment-author {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #005662;
 }
-.container  .update-div button,
-.container .delete-div button {
-  background-color: #ffffff;
-  color: var(--primary);
-  margin: 10px 10px 0 0;
+
+.comment-item .comment-text {
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .content {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .section-add-new .btn-add-new {
+    justify-self: center;
+    width: 100%;
+  }
 }

@@ -7,6 +7,7 @@ userRouter.route('/').post(createNew);
 userRouter.route('/:id').get(getUserById);
 userRouter.route('/:id/posts').get(getPostsForUser);
 userRouter.route('/:username/:password').get(getByUserNameAndPassword);
+userRouter.route('/:id').put(update);
 
 function createNew(req, res) {
     const user = req.body;
@@ -63,5 +64,15 @@ function getPostsForUser(req, res) {
     );
 }
 
+function update(req, res) {
+    const id = req.params.id;
+    const newUser = req.body;
+
+    userDatastore.updateById(id, newUser, (data) => {
+        res.status(200).json(data);
+    }, (error) => {
+        res.status(500).json(error);
+    });
+}
 module.exports = userRouter;
 
