@@ -22,6 +22,19 @@ a {
 /* GLOBAL CSS VARIABLES */
 :root {
     --shadow-container-color: #00363a;
+    --shadow-input-form: #006064;
+
+    --link-color: #005661;
+
+    --primary: #00838e;
+    --primary-light: #4fb3be;
+    --primary-dark: #00363a;
+
+    --secondary: #006064;
+    --secondary-light: #428e92;
+    --secondary-dark: #00363a;
+
+
 }
 
 /* NAVBAR CSS */

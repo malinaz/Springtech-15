@@ -3,9 +3,9 @@ const commentRouter = express.Router();
 const commentDatastore = require('./comment.datastore');
 
 commentRouter.route('/').post(postComment);
-commentRouter.route('/id/:id').get(getComments);
-commentRouter.route('/id/:id').delete(deleteComment);
-commentRouter.route('/id/:id').put(putComment);
+commentRouter.route('/:id').get(getComments);
+commentRouter.route('/:id').delete(deleteComment);
+commentRouter.route('/:id').put(putComment);
 
 function postComment(request, response) {
     const value = request.body;

@@ -189,7 +189,7 @@ function sendAddCommentRequest(comment) {
 
 function sendGetPostCommentsRequest(htmlElement, post) {
   $.ajax({
-    url: 'http://localhost:3000/api/comment/id/' + post._id,
+    url: 'http://localhost:3000/api/comment/' + post._id,
     type: 'GET',
     success: function (result) {
         const comments = result;
@@ -271,7 +271,7 @@ function setUpdateFormEvents(post) {
 
 function sendDeletePostRequest(post) {
   $.ajax({
-    url: 'http://localhost:3000/api/post/id/' + post._id,
+    url: 'http://localhost:3000/api/post/' + post._id,
     type: 'DELETE',
     success: function (result) {
         console.log(result);
@@ -301,7 +301,7 @@ function sendUpdateUserRequest(user) {
 
 function sendUpdatePostRequest(post) {
   $.ajax({
-    url: 'http://localhost:3000/api/post/id/' + post._id,
+    url: 'http://localhost:3000/api/post/' + post._id,
     type: 'PUT',
     data: JSON.stringify(post),
     contentType: "application/json; charset=utf-8",
