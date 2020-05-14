@@ -23,7 +23,7 @@ const postsDatastore = {
     },
 
     getAll: (success, fail) => {
-        Post.find().populate('userId')
+        Post.find().populate('userId', 'username')
             .then((data) => {
                 success(data);
             }).catch((error) => {
