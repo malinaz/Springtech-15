@@ -273,6 +273,34 @@ const userManager = {
       }, () => {
           fail("something went wrong!");
       });
+    },
+
+    checkIfFrieds:  (myId,friendId,success,fail)=> {
+        userDataStore.findUserById(myId, (me) => {
+            if (me && me._id) {
+                userDataStore.findUserById(friendId, (friend) => {
+                    if (friend && friend._id) {
+                        let ok = -1;
+                        for (let i = 0; i < me.myFriends.length; i++) {
+                            if (me.myFriends[i].equals(friend._id)) {
+                                ok = 1;
+                                success(true);
+                                break;
+                            }
+                        }
+                        if(ok === -1) {
+                            success(false);
+                        }
+
+                    }
+                }, (error) => {
+                    fail(error);
+                });
+            }
+
+        }, (error) => {
+            fail(error);
+        });
     }
 
 };
