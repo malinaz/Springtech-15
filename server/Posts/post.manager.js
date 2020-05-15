@@ -4,6 +4,18 @@ const commentDatastore = require("../Comments/comment.datastore");
 
 const postManager = {
 
+    getAll: (success, fail) => {
+        postDatastore.getAll(success, fail);
+    },
+    getById: (id, success, fail) => {
+        postDatastore.getById(id, success, fail);
+    },
+    create: (value, success, fail) => {
+        postDatastore.create(value, success, fail);
+    },
+    updateById: (id, newPost, success, fail) => {
+        postDatastore.updateById(id, newPost, success, fail);
+    },
     manageLikePost: (userId, postId, success, fail) => {
         postDatastore.getPostById(
             postId,

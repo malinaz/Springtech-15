@@ -1,6 +1,5 @@
 const express = require("express");
 const userRouter = express.Router();
-const userDatastore = require("./user.dataStore");
 const userManager = require("./user.manager");
 
 userRouter.route("/").post(createNew);
@@ -18,7 +17,7 @@ userRouter.route("/:id").put(update);
 
 function createNew(req, res) {
   const user = req.body;
-  userDatastore.createNew(
+  userManager.createNew(
     user,
     (data) => {
       res.status(200).json(data);
@@ -33,7 +32,7 @@ function getByUserNameAndPassword(request, response) {
   const userName = request.params.username;
   const password = request.params.password;
 
-  userDatastore.findByUserNameAndPassword(
+  userManager.findByUserNameAndPassword(
     userName,
     password,
     (data) => {
@@ -73,7 +72,7 @@ function getPostsForUser(req, res) {
 function getAllMyFreinds(req, res) {
   const id = req.params.id;
 
-  userDatastore.getAllMyFreinds(
+  userManager.getAllMyFreinds(
     id,
     (data) => {
       res.status(200).json(data);
@@ -84,7 +83,7 @@ function getAllMyFreinds(req, res) {
 function getAllFreindsRequest(req, res) {
   const id = req.params.id;
 
-  userDatastore.getAllFreindsRequest(
+  userManager.getAllFreindsRequest(
     id,
     (data) => {
       res.status(200).json(data);
@@ -153,7 +152,7 @@ function update(req, res) {
   const id = req.params.id;
   const newUser = req.body;
 
-  userDatastore.updateById(id, newUser, (data) => {
+  userManager.updateById(id, newUser, (data) => {
       res.status(200).json(data);
   }, (error) => {
       res.status(500).json(error);

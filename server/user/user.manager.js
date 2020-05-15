@@ -2,8 +2,23 @@ const userDataStore = require("./user.dataStore");
 const postDataStore = require("../Posts/post.datastore");
 
 const userManager = {
+    createNew: (user, success, fail) => {
+        userDataStore.createNew(user, success, fail);
+    },
   getUser: (id, success, fail) => {
     userDataStore.findUserById(id, success, fail);
+  },
+  updateById: (id, newUser, success, fail) => {
+      userDataStore.updateById(id, newUser, success, fail);
+  },
+  findByUserNameAndPassword: (userName, password, success, fail) => {
+    userDataStore.findByUserNameAndPassword(userName, password, success, fail);
+  },
+  getAllMyFreinds: (id, success, fail) => {
+    userDataStore.getAllMyFreinds(id, success, fail);
+  },
+  getAllFreindsRequest: (id, success, fail) => {
+    userDataStore.getAllFreindsRequest(id, success, fail);
   },
   getPosts: (id, type, success, fail) => {
     if (!type) {
