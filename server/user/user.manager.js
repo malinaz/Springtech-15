@@ -7,7 +7,7 @@ const userManager = {
   },
   getPosts: (id, type, success, fail) => {
     if (!type) {
-      postDataStore.getAllPostsAndPopulateFullName(id, success, fail);
+      postDataStore.getAllPostsAndPopulateUsername(id, success, fail);
     }
 
     if (type === "liked") {
@@ -132,13 +132,13 @@ const userManager = {
                              console.log(pos);
                              if(pos!=-1)
                              {
-                                
+
                                 me.friendsRequest.splice(pos,1)
                                 userDataStore.updateById(
                                   me._id,
                                   me,
                                   (updatedMe)=>{
-                                      
+
                                       success(updatedMe)
                                   },
                                   (error)=>{
