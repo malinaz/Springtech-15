@@ -160,6 +160,7 @@ a {
 
 .post-item .post-text {
     padding: 0 10px;
+    white-space: pre-wrap;
 }
 
 .post-item .post-actions {

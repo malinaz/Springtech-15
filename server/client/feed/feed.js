@@ -15,7 +15,7 @@ function sendGetAllPostsRequest() {
             renderPosts(result, sendGetAllPostsRequest);
         },
         error: function (error) {
-            console.log(error);
+          toastr['error']('Failed to retrieve posts!', 'Error', toastrOptions);
         },
     });
 }
@@ -45,11 +45,11 @@ function sendAddPostRequest(postText) {
         data: JSON.stringify(post),
         contentType: 'application/json; charset=utf-8',
         success: function (result) {
-            console.log(result);
-            sendGetAllPostsRequest();
+          toastr['success']('Post created successfully!', 'Success', toastrOptions);
+          sendGetAllPostsRequest();
         },
         error: function (error) {
-            console.log(error);
+          toastr['error']('Failed to create new post!', 'Error', toastrOptions);
         },
     });
 }

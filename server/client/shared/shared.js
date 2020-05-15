@@ -1,3 +1,5 @@
+let activeUser;
+
 function renderNavbar() {
     let navbar = $('<nav></nav>').addClass('navbar');
     let nav = $('<div></div>').addClass('nav');
@@ -49,6 +51,24 @@ function renderNavbar() {
     setNabvarEvents();
 }
 
+var toastrOptions = {
+    closeButton: false,
+    debug: false,
+    newestOnTop: false,
+    progressBar: true,
+    positionClass: 'toast-bottom-right',
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: '300',
+    hideDuration: '1000',
+    timeOut: '10000',
+    extendedTimeOut: '1000',
+    showEasing: 'swing',
+    hideEasing: 'linear',
+    showMethod: 'fadeIn',
+    hideMethod: 'fadeOut',
+};
+
 function setNabvarEvents() {
     $('.list-item').on('click', function (event) {
         const target = $(event.target);
@@ -85,7 +105,7 @@ function renderPost(post) {
 
     if (post.userId._id === localStorage.getItem('userId')) {
         postActions.append(postOptionsBtn);
-    } else if (!activeUser.savedPosts.includes(post._id)) {
+    } else if (activeUser && !activeUser.savedPosts.includes(post._id)) {
         postActions.append(postSaveBtn);
     }
 
@@ -401,13 +421,20 @@ function getUser(success) {
                     success(data);
                 }
             },
+            error: () => {
+                toastr['error'](
+                    'Failed to retrieve user!',
+                    'Error',
+                    toastrOptions
+                );
+            },
         });
     }
 }
 
 function renderPosts(postList, updatePosts) {
     $('.posts-list').empty();
-   
+
     const postsReversed = postList.reverse();
 
     postsReversed.forEach((post) => {

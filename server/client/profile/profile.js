@@ -135,6 +135,9 @@ function displayMyPosts() {
         success: (postList) => {
             renderPosts(postList, displayMyPosts);
         },
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 }
 
@@ -149,6 +152,9 @@ function displayLikedPosts() {
         success: (postList) => {
             renderPosts(postList, displayLikedPosts);
         },
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 }
 
@@ -163,6 +169,9 @@ function displaySavedPosts() {
         success: (postList) => {
             renderPosts(postList, displaySavedPosts);
         },
+        error: function(error){
+            toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
+        }
     });
 }
 
