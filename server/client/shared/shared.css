@@ -78,6 +78,7 @@ a {
     display: grid;
     align-items: center;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 .nav-list .list-item:hover {
@@ -169,6 +170,7 @@ a {
     row-gap: 20px;
     box-sizing: border-box;
     position: relative;
+    border-radius: 5px;
 }
 
 .post-item .post-author {

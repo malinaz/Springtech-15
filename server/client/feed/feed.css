@@ -30,6 +30,7 @@
   font-size: 1.5rem;
   padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
 }
 
 .section-add-new .btn-add-new {
