@@ -216,6 +216,119 @@ a {
     background-color: #005662;
 }
 
+/* COMMENT */
+
+.post-item .comment-section {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    row-gap: 20px;
+  }
+  
+  .comment-section .section-add-comment {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+  }
+  
+  .section-add-comment .add-comment-input {
+    resize: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+  
+  .comment-section .add-comment-btn {
+    align-self: center;
+    justify-self: end;
+    font-size: 1rem;
+    background-color: #00838f;
+    color: #fff;
+    padding: 10px 30px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+  }
+  
+  .section-comments-list > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+  .section-comments-list .comment-item {
+    display: grid;
+    grid-template-rows: repeat(2,auto);
+    row-gap: 5px;
+    border-bottom: 1px solid #00838f;
+    padding: 10px;
+  }
+  
+  .comment-item .comment-author {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #005662;
+  }
+  
+  .comment-item .comment-text {
+    overflow-x: auto;
+  }
+  
+  .edit-form {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: grid;
+  }
+  
+  .edit-form .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+    background-color: #000;
+    z-index: 2;
+  }
+  
+  .edit-form .form-box {
+    align-self: center;
+    justify-self: center;
+    width: 75%;
+    display: grid;
+    grid-template-rows: 150px 50px;
+    z-index: 3;
+  }
+  
+  .form-box .edit-input {
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    border: 5px solid #005662;
+    padding: 5px;
+  }
+  
+  .form-box .form-options {
+    justify-self: end;
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    column-gap: 10px;
+  }
+  
+  .form-options > * {
+    background-color: #00838f;
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .form-options > *:hover {
+    background-color: #005662;
+  }
+  
+  .noscroll {
+    overflow: hidden;
+  }
+
 @media only screen and (max-width: 768px) {
     .post-item .post-author {
         justify-self: center;
