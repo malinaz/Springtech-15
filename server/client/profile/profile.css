@@ -43,6 +43,7 @@ p {
 .posts-header {
     grid-row: 1;
     display: flex;
+    margin-bottom: 20px;
 }
 
 .profile-posts {
@@ -52,7 +53,7 @@ p {
     flex-grow: 1;
     background-color: var(--primary);
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .profile-posts.selected {

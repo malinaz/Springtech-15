@@ -1,14 +1,13 @@
 function profile() {
     renderNavbar();
-    getUser();
+    getUser(() => {
+        createProfilePage();
+        displayMyPosts();
+        renderPost;
+    });
 }
 
-var user;
-
-function createProfilePage(userData) {
-
-    user = userData;
-
+function createProfilePage() {
     const body = $('body');
     const profileContainer = $('<div></div>').addClass('profile-container');
     const profileMain = $('<div></div>').addClass('profile-main');
@@ -20,8 +19,8 @@ function createProfilePage(userData) {
     body.append(profileMain);
 }
 
-function getInitials(user){
-    const acronymList = user.fullName.match(/\b\w/g);
+function getInitials() {
+    const acronymList = activeUser.fullName.match(/\b\w/g);
 
     let firstNameLetter;
     let lastNameLetter;
@@ -34,24 +33,25 @@ function getInitials(user){
         lastNameLetter = '';
     }
 
-    return firstNameLetter+lastNameLetter;
+    return firstNameLetter + lastNameLetter;
 }
 
 function createPhoto(photoContainer) {
     const photo = $('<div></div>').addClass('profile-picture');
     const photoName = $('<div></div>').addClass('photo-name');
 
-    photoName.html(`${getInitials(user)}`);
+    photoName.html(`${getInitials()}`);
     photo.append(photoName);
 
     photoContainer.append(photo);
 }
 
-function renderProfile(profileContainer){
-
+function renderProfile(profileContainer) {
     const userDetails = $('<div></div>').addClass('user-details');
 
-    const photoContainer = $('<div></div>').addClass('profile-picture-container');
+    const photoContainer = $('<div></div>').addClass(
+        'profile-picture-container'
+    );
     createPhoto(photoContainer);
 
     const userInfo = $('<div></div>').addClass('user-info');
@@ -60,10 +60,10 @@ function renderProfile(profileContainer){
     const email = $('<p></p>').addClass('email');
     const gender = $('<p></p>').addClass('genre');
 
-    name.html(user.fullName);
-    username.html(user.username);
-    email.html(user.email);
-    gender.html(user.gender);
+    name.html(activeUser.fullName);
+    username.html(activeUser.username);
+    email.html(activeUser.email);
+    gender.html(activeUser.gender);
 
     userInfo.append(name);
     userInfo.append(username);
@@ -76,13 +76,14 @@ function renderProfile(profileContainer){
     profileContainer.append(userDetails);
 }
 
-function renderPostArea(profileContainer){
-
+function renderPostArea(profileContainer) {
     const profilePosts = $('<div></div>').addClass('profile-posts-section');
     const postsHeader = $('<div></div>').addClass('posts-header');
-    const postsContent = $('<div></div>').addClass('posts-content');
+    const postsList = $('<div></div>').addClass('posts-list');
 
-    const myPosts = $('<div></div>').addClass('profile-posts my-posts selected');
+    const myPosts = $('<div></div>').addClass(
+        'profile-posts my-posts selected'
+    );
     const likedPosts = $('<div></div>').addClass('profile-posts liked-posts');
     const savedPosts = $('<div></div>').addClass('profile-posts liked-posts');
 
@@ -110,7 +111,7 @@ function renderPostArea(profileContainer){
     postsHeader.append(savedPosts);
 
     profilePosts.append(postsHeader);
-    profilePosts.append(postsContent);
+    profilePosts.append(postsList);
     profileContainer.append(profilePosts);
 }
 
@@ -123,26 +124,6 @@ function selectElement(element) {
     element.addClass('selected');
 }
 
-function getUser() {
-    const userId = localStorage.getItem('userId');
-
-    if (userId) {
-        $.ajax({
-            url: `http://localhost:3000/api/user/${userId}`,
-            type: 'GET',
-            contentType: 'application/json',
-            dataType: 'json',
-            success: (data) => {
-                createProfilePage(data);
-                displayMyPosts();
-            },
-            error: function(error){
-                toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
-            }
-        });
-    }
-}
-
 function displayMyPosts() {
     const userId = localStorage.getItem('userId');
 
@@ -151,61 +132,13 @@ function displayMyPosts() {
         type: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-        success: renderPosts,
+        success: (postList) => {
+            renderPosts(postList, displayMyPosts);
+        },
         error: function(error){
             toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
         }
     });
-}
-
-function constructPostElement(onePost) {
-    const photoContainer = $('<div></div>').addClass(
-        'post-author-picture-container'
-    );
-
-    const photo = $('<div></div>').addClass('post-author-profile-picture');
-
-    const photoName = $('<div></div>').addClass('post-author-photo-name');
-
-    photoName.html(`${getInitials(onePost.userId)}`);
-    photo.append(photoName);
-
-    photoContainer.append(photo);
-
-    const postElement = $('<div></div>').addClass('post-element');
-    const authorName = $('<div></div>').addClass('post-author-fullname');
-    const postTextContent = $('<div></div>').addClass('post-text-content');
-    const likeCount = $('<div></div>').addClass('post-like-count');
-    const commentCount = $('<div></div>').addClass('post-comment-count');
-
-    authorName.html(`${onePost.userId.fullName}`);
-    postTextContent.html(`${onePost.text}`);
-    likeCount.html(`Likes: ${onePost.likes}`);
-    commentCount.html(`Comments: ${onePost.comments.length}`);
-
-    postElement.append(photoContainer);
-    postElement.append(authorName);
-    postElement.append(postTextContent);
-    postElement.append(likeCount);
-    postElement.append(commentCount);
-
-    return postElement;
-}
-
-function renderPosts(postList) {
-    const postsContent = $('.posts-content');
-    postsContent.empty();
-    if (postList.length > 0) {
-        for (let post of postList) {
-            postsContent.append(constructPostElement(post));
-        }
-    } else {
-        const emptyWrapper = $('<div></div>').addClass('posts-empty-wrapper');
-        const emptyMessage = $('<div></div>').addClass('posts-empty-message');
-        emptyMessage.html('No posts to display!');
-        emptyWrapper.append(emptyMessage);
-        postsContent.append(emptyWrapper);
-    }
 }
 
 function displayLikedPosts() {
@@ -216,7 +149,9 @@ function displayLikedPosts() {
         type: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-        success: renderPosts,
+        success: (postList) => {
+            renderPosts(postList, displayLikedPosts);
+        },
         error: function(error){
             toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
         }
@@ -231,7 +166,9 @@ function displaySavedPosts() {
         type: 'GET',
         contentType: 'application/json',
         dataType: 'json',
-        success: renderPosts,
+        success: (postList) => {
+            renderPosts(postList, displaySavedPosts);
+        },
         error: function(error){
             toastr['error']('An error has occured, please try again later!', 'Error', toastrOptions);
         }
@@ -239,7 +176,6 @@ function displaySavedPosts() {
 }
 
 $(() => {
-    // shared
     checkPagePermission(() => {
         profile();
     });
