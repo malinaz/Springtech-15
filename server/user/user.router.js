@@ -15,6 +15,7 @@ userRouter.route("/delete-friend/:myId/:friendId").get(deleteFriendRequest);
 
 
 userRouter.route("/check-request/:myId/:friendId").get(checkIfRequestSent);
+userRouter.route("/check-friends/:myId/:friendId").get(checkIfFriends);
 
 userRouter.route("/check-request/:myId/:friendId").get(checkIfRequestSent);
 userRouter.route("/:id").put(update);
@@ -161,6 +162,21 @@ function checkIfRequestSent(req,res) {
 
 
     userManager.checkIfRequestSent(
+        myId,
+        friendId,
+        (data) => {
+            res.status(200).json(data);
+        },
+        (error) => res.status(500).json(error)
+    );
+}
+
+function checkIfFriends(req,res) {
+    const myId = req.params.myId;
+    const friendId = req.params.friendId;
+
+
+    userManager.checkIfFrieds(
         myId,
         friendId,
         (data) => {

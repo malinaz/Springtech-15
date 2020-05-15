@@ -100,11 +100,13 @@ a {
     color: white;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .request-popup > button, .request-popup > p {
     text-align: center;
     margin:auto;
+    cursor: pointer;
 }
 
 
@@ -178,6 +180,7 @@ a {
     align-self: flex-start;
     color: #005662;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .post-item .post-text {

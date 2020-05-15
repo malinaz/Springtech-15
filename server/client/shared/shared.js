@@ -156,33 +156,46 @@ function renderSendRequestPopUp(ok, post, myId, friendId) {
     popUp.click( () => {
         popUp.remove();
     })
-    if (!ok) {
-        const message = $('<p>Send a friend request!</p>');
 
-        const sendRequestBtn = $('<button></button>').addClass('send-request-btn').text('Send Request');
-        sendRequestBtn.click( () => {
-            sendFriendRequest(myId, friendId, (response) => {
-                toastr['success']('Request sent!', 'Success', toastrOptions);
-            })
-        })
+    checkIfFriends(myId, friendId, (response) => {
+        if(response) {
+            const message = $('<p>Already friends!</p>');
+            popUp.append(message);
+        } else {
+            console.log("aiciii")
+            if (!ok) {
+                const message = $('<p>Send a friend request!</p>');
 
-        popUp.append(message);
-        popUp.append(sendRequestBtn);
+                const sendRequestBtn = $('<button></button>').addClass('send-request-btn').text('Send Request');
+                sendRequestBtn.click( () => {
+                    sendFriendRequest(myId, friendId, (response) => {
+                        toastr['success']('Request sent!', 'Success', toastrOptions);
+                    })
+                })
 
-    } else {
-        const message = $('<p>Request sent!</p>');
+                popUp.append(message);
+                popUp.append(sendRequestBtn);
 
-        const cancelRequestBtn = $('<button></button>').addClass('cancel-request-btn').text('Cancel Request');
-        cancelRequestBtn.click( () => {
-            cancelFriendRequest(myId, friendId, (response) => {
-                toastr['success']('Request canceled!', 'Success', toastrOptions);
-            })
-        })
+            } else {
+                const message = $('<p>Request sent!</p>');
 
-        popUp.append(message);
-        popUp.append(cancelRequestBtn);
-    }
-    post.append(popUp);
+                const cancelRequestBtn = $('<button></button>').addClass('cancel-request-btn').text('Cancel Request');
+                cancelRequestBtn.click( () => {
+                    cancelFriendRequest(friendId,myId,  (response) => {
+                        console.log(response.friendsRequest);
+                        toastr['success']('Request canceled!', 'Success', toastrOptions);
+                    })
+                })
+
+                popUp.append(message);
+                popUp.append(cancelRequestBtn);
+            }
+
+        }
+        post.append(popUp);
+    })
+
+
 }
 
 
@@ -208,6 +221,21 @@ function checkPagePermission(success) {
 function checkIfRequestSent(myId, friendId, callback) {
     $.ajax({
         url: `http://localhost:3000/api/user/check-request/${myId}/${friendId}`,
+        type: 'GET',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            callback(response);
+        },
+        error: function (error) {
+            toastr['error']('A connection error has occured!', 'Connection Failure', toastrOptions);
+        }
+    });
+}
+
+function checkIfFriends(myId, friendId, callback) {
+    $.ajax({
+        url: `http://localhost:3000/api/user/check-friends/${myId}/${friendId}`,
         type: 'GET',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
