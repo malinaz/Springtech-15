@@ -54,11 +54,16 @@ function updatePost(request, response) {
 function deletePost(request, response) {
     const id = request.params.id;
 
-    postsDatastore.remove(id, (data) => {
+    // postsDatastore.remove(id, (data) => {
+    //     response.status(200).json(data);
+    // }, (error) => {
+    //     response.status(500).json(error);
+    // });
+    postsManager.deleteOne(id, (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
-    });
+    })
 }
 
 function manageLikes(request, response) {

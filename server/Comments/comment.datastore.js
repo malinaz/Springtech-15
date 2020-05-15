@@ -36,8 +36,17 @@ const commentDatastore = {
             .then((data) => {
                 success(data);
             }).catch((error) => {
-            fail(error);
-        });
+                fail(error);
+            });
+    },
+
+    removeManyByPostId: (postId, success, fail) => {
+        Comment.deleteMany({"postId": postId})
+            .then((data) => {
+                success(data);
+            }).catch((error) => {
+                fail(error);
+            })
     }
 }
 
