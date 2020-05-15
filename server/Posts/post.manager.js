@@ -1,5 +1,6 @@
 const userDatastore = require("../user/user.dataStore");
 const postDatastore = require("./post.datastore");
+const commentDatastore = require("../Comments/comment.datastore");
 
 const postManager = {
 
@@ -51,6 +52,17 @@ const postManager = {
             (error) => {
                 fail({error: "SERVER_ERROR"});
             })
+    },
+    deleteOne: (postId, success, fail) => {
+        postDatastore.remove(postId, (data) => {
+            commentDatastore.removeManyByPostId(postId, (rez) => {
+                success(rez);
+            }, (error) => {
+                faild({error: "SERVER_ERROR_DEL_MANY_COMMS"});
+            })
+        }, (error) => {
+            fail({error: "SERVER_ERROR_DEL_POST"});
+        })
     }
 }
 
