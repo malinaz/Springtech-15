@@ -82,6 +82,7 @@ function renderPostsList() {
   });
 
   setPostEvents();
+
 }
 
 function setPostEvents() {
@@ -233,7 +234,7 @@ function renderUpdateForm(post) {
   let editForm = $('<div></div>').addClass('edit-form');
   const overlay = $('<div></div>').addClass('overlay');
   let formBox = $('<div></div>').addClass('form-box');
-  const input = $('<textarea></textarea').addClass('edit-input').val(post.text).attr('rows', '5');
+  const input = $('<textarea></textarea>').addClass('edit-input').val(post.text).attr('rows', '5');
   let formOptions = $('<div></div>').addClass('form-options');
   const updateBtb = $('<button></button>').addClass('update-btn').text('Update');
   const cancelBtb = $('<button></button>').addClass('cancel-btn').text('Cancel');
@@ -312,3 +313,7 @@ function sendUpdatePostRequest(post) {
     }
   });
 }
+
+
+
+
