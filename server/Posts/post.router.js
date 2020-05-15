@@ -1,6 +1,5 @@
 const express = require('express');
 const postsRouter = express.Router();
-const postsDatastore = require('./post.datastore');
 const postsManager = require('./post.manager');
 
 
@@ -14,7 +13,7 @@ postsRouter.route('/like/user/:userId/post/:postId').post(manageLikes);
 
 function getAll(request, response) {
 
-    postsDatastore.getAll( (data) => {
+    postsManager.getAll( (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
@@ -24,7 +23,7 @@ function getAll(request, response) {
 function getById(request, response) {
     const id = request.params.id;
 
-    postsDatastore.getById( id,(data) => {
+    postsManager.getById( id,(data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
@@ -33,7 +32,7 @@ function getById(request, response) {
 
 function createPost(request, response) {
     const value = request.body;
-    postsDatastore.create(value, (data) => {
+    postsManager.create(value, (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
@@ -44,7 +43,7 @@ function updatePost(request, response) {
     const id = request.params.id;
     const newPost = request.body;
 
-    postsDatastore.updateById(id, newPost, (data) => {
+    postsManager.updateById(id, newPost, (data) => {
         response.status(200).json(data);
     }, (error) => {
         response.status(500).json(error);
