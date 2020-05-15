@@ -42,6 +42,7 @@ function renderNavbar() {
         () => {
             logOut.remove();
             profile.hide();
+            friends.hide();
             logIn.show();
         }
     );

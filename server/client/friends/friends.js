@@ -27,7 +27,6 @@ function initFriendsBoxEvents(unfriendBtn, index) {
     unfriendBtn.click( () => {
         deleteFriend(userId, friends[index]._id, (response) => {
             friends.splice(index,1);
-            console.log("ce plm");
             renderFriends();
             toastr['success']('Friend deleted!', 'Success', toastrOptions);
         })
