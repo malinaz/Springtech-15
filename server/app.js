@@ -43,6 +43,10 @@ router.get('/profile', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/profile/profile.html'));
 });
 
+router.get('/friends', function (req, res) {
+    res.sendFile(path.join(__dirname + '/client/friends/friends.html'));
+});
+
 router.get(['/', '/login'], function (req, res) {
     res.sendFile(path.join(__dirname + '/client/auth/login/login.html'));
 });

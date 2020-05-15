@@ -15,6 +15,10 @@ function renderNavbar() {
         .addClass('list-item')
         .text('Profile')
         .attr('href', '/profile');
+    const friends = $('<a></a>')
+        .addClass('list-item')
+        .text('Friends')
+        .attr('href', '/friends');
     const logOut = $('<a></a>').addClass('list-item').text('Log Out');
     const logIn = $('<a></a>')
         .addClass('list-item')
@@ -25,7 +29,7 @@ function renderNavbar() {
 
     logo.append(logoIcon);
     dropdownBtn.append(dropdownIcon);
-    navList.append(newsFeed, profile, logOut, logIn);
+    navList.append(newsFeed, profile, friends, logOut, logIn);
     dropdown.append(navList, dropdownBtn);
     nav.append(logo, dropdown);
     navbar.append(nav);
@@ -105,8 +109,22 @@ function renderPost(post) {
 
     if (post.userId._id === localStorage.getItem('userId')) {
         postActions.append(postOptionsBtn);
+
     } else if (activeUser && !activeUser.savedPosts.includes(post._id)) {
+
         postActions.append(postSaveBtn);
+
+        //we only want to send requests to others
+        postAuthor.click( () => {
+            const userId = localStorage.getItem('userId');
+            if (userId !== null) {
+                checkIfRequestSent(userId, post.userId._id, (response) => {
+                    renderSendRequestPopUp(response, postItem, userId, post.userId._id);
+                })
+            } else {
+
+            }
+        })
     }
 
     postItem.append(postAuthor, postText, postActions);
@@ -131,6 +149,43 @@ function renderOptionsMenu(post) {
     post.append(optionsList);
 }
 
+
+function renderSendRequestPopUp(ok, post, myId, friendId) {
+    $('.request-popup').remove();
+    const popUp = $('<div></div>').addClass('request-popup');
+    popUp.click( () => {
+        popUp.remove();
+    })
+    if (!ok) {
+        const message = $('<p>Send a friend request!</p>');
+
+        const sendRequestBtn = $('<button></button>').addClass('send-request-btn').text('Send Request');
+        sendRequestBtn.click( () => {
+            sendFriendRequest(myId, friendId, (response) => {
+                toastr['success']('Request sent!', 'Success', toastrOptions);
+            })
+        })
+
+        popUp.append(message);
+        popUp.append(sendRequestBtn);
+
+    } else {
+        const message = $('<p>Request sent!</p>');
+
+        const cancelRequestBtn = $('<button></button>').addClass('cancel-request-btn').text('Cancel Request');
+        cancelRequestBtn.click( () => {
+            cancelFriendRequest(myId, friendId, (response) => {
+                toastr['success']('Request canceled!', 'Success', toastrOptions);
+            })
+        })
+
+        popUp.append(message);
+        popUp.append(cancelRequestBtn);
+    }
+    post.append(popUp);
+}
+
+
 function clear(navbar) {
     navbar.remove();
     localStorage.clear();
@@ -148,6 +203,54 @@ function checkIsLoggedIn(success, fail) {
 function checkPagePermission(success) {
     checkIsLoggedIn(success, () => (window.location = '/login'));
 }
+
+
+function checkIfRequestSent(myId, friendId, callback) {
+    $.ajax({
+        url: `http://localhost:3000/api/user/check-request/${myId}/${friendId}`,
+        type: 'GET',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            callback(response);
+        },
+        error: function (error) {
+            toastr['error']('A connection error has occured!', 'Connection Failure', toastrOptions);
+        }
+    });
+}
+
+function sendFriendRequest(myId, friendId, callback) {
+    $.ajax({
+        url: `http://localhost:3000/api/user/send-request/${myId}/${friendId}`,
+        type: 'GET',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            callback(response);
+        },
+        error: function (error) {
+            toastr['error']('A connection error has occured!', 'Connection Failure', toastrOptions);
+        }
+    });
+}
+
+function cancelFriendRequest(myId, friendId, callback) {
+    $.ajax({
+        url: `http://localhost:3000/api/user/cancel-request/${myId}/${friendId}`,
+        type: 'GET',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            callback(response);
+        },
+        error: function (error) {
+            toastr['error']('A connection error has occured!', 'Connection Failure', toastrOptions);
+        }
+    });
+}
+
+
 
 function setPostEvents(postList, updatePost) {
     // like
@@ -321,7 +424,7 @@ function renderUpdateForm(post, updatePost) {
     let editForm = $('<div></div>').addClass('edit-form');
     const overlay = $('<div></div>').addClass('overlay');
     let formBox = $('<div></div>').addClass('form-box');
-    const input = $('<textarea></textarea')
+    const input = $('<textarea></textarea>')
         .addClass('edit-input')
         .val(post.text)
         .attr('rows', '5');
@@ -443,3 +546,4 @@ function renderPosts(postList, updatePosts) {
 
     setPostEvents(postList, updatePosts);
 }
+

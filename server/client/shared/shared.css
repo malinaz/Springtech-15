@@ -89,6 +89,26 @@ a {
     margin-left: auto;
 }
 
+.request-popup {
+    position: absolute;
+    height: 75px;
+    width: 150px;
+    top:-80px;
+    left: -50px;
+    background-color: var(--primary);
+    border: 2px solid var(--primary-dark);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.request-popup > button, .request-popup > p {
+    text-align: center;
+    margin:auto;
+}
+
+
+
 @media only screen and (max-width: 768px) {
     .navbar .nav {
         position: relative;

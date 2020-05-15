@@ -144,7 +144,7 @@ const userManager = {
                                      break;
                                  }
                              }
-                             console.log(pos);
+
                              if(pos!=-1)
                              {
 
@@ -153,6 +153,9 @@ const userManager = {
                                   me._id,
                                   me,
                                   (updatedMe)=>{
+
+                                      console.log(pos);
+
 
                                       success(updatedMe)
                                   },
@@ -240,7 +243,37 @@ const userManager = {
               fail(error)
           }
       )
-  }
+  },
+
+    checkIfRequestSent: (myId,friendId,success,fail)=>{
+      userDataStore.findUserById(myId, (me) => {
+          if (me && me._id) {
+              userDataStore.findUserById(friendId, (friend) => {
+                  if (friend && friend._id) {
+                      let found = -1;
+                      for (let i = 0; i < friend.friendsRequest.length; i++) {
+
+                          if (friend.friendsRequest[i].equals(myId)) {
+                              found = i;
+                              break;
+                          }
+                      }
+
+                      if (found === -1) {
+                          success(false);
+                      } else {
+                          success(true);
+                      }
+
+                  }
+              }, () => {
+                  fail("something went wrong!");
+              });
+          }
+      }, () => {
+          fail("something went wrong!");
+      });
+    }
 
 };
 
