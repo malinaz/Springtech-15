@@ -2,12 +2,27 @@ const userDataStore = require("./user.dataStore");
 const postDataStore = require("../Posts/post.datastore");
 
 const userManager = {
+    createNew: (user, success, fail) => {
+        userDataStore.createNew(user, success, fail);
+    },
   getUser: (id, success, fail) => {
     userDataStore.findUserById(id, success, fail);
   },
+  updateById: (id, newUser, success, fail) => {
+      userDataStore.updateById(id, newUser, success, fail);
+  },
+  findByUserNameAndPassword: (userName, password, success, fail) => {
+    userDataStore.findByUserNameAndPassword(userName, password, success, fail);
+  },
+  getAllMyFreinds: (id, success, fail) => {
+    userDataStore.getAllMyFreinds(id, success, fail);
+  },
+  getAllFreindsRequest: (id, success, fail) => {
+    userDataStore.getAllFreindsRequest(id, success, fail);
+  },
   getPosts: (id, type, success, fail) => {
     if (!type) {
-      postDataStore.getAllPostsAndPopulateFullName(id, success, fail);
+      postDataStore.getAllPostsAndPopulateUsername(id, success, fail);
     }
 
     if (type === "liked") {
@@ -132,13 +147,16 @@ const userManager = {
 
                              if(pos!=-1)
                              {
-                                
+
                                 me.friendsRequest.splice(pos,1)
                                 userDataStore.updateById(
                                   me._id,
                                   me,
                                   (updatedMe)=>{
+
                                       console.log(pos);
+
+
                                       success(updatedMe)
                                   },
                                   (error)=>{

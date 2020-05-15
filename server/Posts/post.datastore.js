@@ -31,9 +31,9 @@ const postsDatastore = {
         });
     },
 
-    getAllPostsAndPopulateFullName: (id, success, fail) => {
+    getAllPostsAndPopulateUsername: (id, success, fail) => {
         Post.find({"userId": id})
-            .populate('userId', 'fullName')
+            .populate('userId', 'username')
             .then((data) => {
                 success(data);
             }).catch((error) => {
