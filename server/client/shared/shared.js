@@ -44,7 +44,7 @@ function renderNavbar() {
 
     logOut.click(() => {
         clear(navbar);
-        renderNavbar();
+        window.location = '/feed';
     });
 
     $('body').prepend(navbar);
