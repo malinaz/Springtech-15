@@ -14,6 +14,7 @@ userRouter.route("/accept-request/:myId/:friendId").get(acceptFriendRequest);
 userRouter.route("/cancel-request/:myId/:friendId").get(cancelFriendRequest);
 userRouter.route("/delete-friend/:myId/:friendId").get(deleteFriendRequest);
 userRouter.route("/check-request/:myId/:friendId").get(checkIfRequestSent);
+userRouter.route("/:id").put(update);
 
 function createNew(req, res) {
   const user = req.body;
@@ -161,6 +162,17 @@ function checkIfRequestSent(req,res)
         },
         (error) => res.status(500).json(error)
     );
+}
+
+function update(req, res) {
+  const id = req.params.id;
+  const newUser = req.body;
+
+  userDatastore.updateById(id, newUser, (data) => {
+      res.status(200).json(data);
+  }, (error) => {
+      res.status(500).json(error);
+  });
 }
 
 
