@@ -6,6 +6,7 @@ let friends = []
 
 
 const container = $('<div class="container"></div>');
+const subContainer = $('<div class="subcontainer"></div>');
 const requests_div = $('<div class="requests-box"></div>')
 const friends_div = $('<div class="friends-box"></div>')
 
@@ -13,11 +14,24 @@ function renderFriendsPage() {
     container.remove()
     $('body').append(container)
 
-    container.append(requests_div)
-    container.append(friends_div)
+    subContainer.append(requests_div)
+    subContainer.append(friends_div)
+
+    container.append(subContainer);
 
     renderRequests()
     renderFriends()
+}
+
+function initFriendsBoxEvents(unfriendBtn, index) {
+    unfriendBtn.click( () => {
+        deleteFriend(userId, friends[index]._id, (response) => {
+            friends.splice(index,1);
+            console.log("ce plm");
+            renderFriends();
+            toastr['success']('Friend deleted!', 'Success', toastrOptions);
+        })
+    })
 }
 
 function renderFriends() {
@@ -37,14 +51,7 @@ function renderFriends() {
 
         const name_p = $('<p class="name"></p>').append(friends[i].fullName)
 
-        const unfriend_btn = $('<button class="reject-btn">Unfriend</button>')
-        unfriend_btn.click( () => {
-            deleteFriend(userId, friends[i]._id, (response) => {
-                friends.splice(i,1);
-                renderFriends();
-                toastr['success']('Friend deleted!', 'Success', toastrOptions);
-            })
-        })
+        const unfriend_btn = $('<button class="unfriend-btn">Unfriend</button>')
 
         friendContainer_div.append(avatar_div)
         friendContainer_div.append(name_p)
@@ -54,6 +61,8 @@ function renderFriends() {
         listElement_li.append(friendContainer_div)
 
         friendsList_ul.append(listElement_li)
+
+        initFriendsBoxEvents(unfriend_btn, i);
 
     }
     friends_div.append(friendsList_ul)
@@ -80,19 +89,26 @@ function renderRequests() {
         const accept_btn = $('<button class="accept-btn">Accept</button>')
         accept_btn.click( () => {
             acceptFriendRequest(userId, requests[i]._id, (response) => {
-                requests.splice(i,1);
-                friends.push(requests[i]);
-                renderRequests();
-                renderFriends();
-                toastr['success']('Request accepted!', 'Success', toastrOptions);
+                cancelFriendRequest(userId, requests[i]._id, (response) => {
+                    friends.push(requests[i]);
+                    requests.splice(i,1);
+
+                    renderRequests();
+                    renderFriends();
+
+                    toastr['success']('Request accepted!', 'Success', toastrOptions);
+                })
+
             })
         })
 
         const reject_btn = $('<button class="reject-btn">Reject</button>')
         reject_btn.click( () => {
-            rejectFriendRequest(userId, requests[i]._id, (response) => {
+            cancelFriendRequest(userId, requests[i]._id, (response) => {
                 requests.splice(i,1);
+
                 renderRequests();
+
                 toastr['success']('Request rejected!', 'Success', toastrOptions);
             })
         })
@@ -108,7 +124,6 @@ function renderRequests() {
         listElement_li.append(requestContainer_div)
 
         requestList_ul.append(listElement_li)
-
     }
     requests_div.append(requestList_ul)
 }
@@ -159,7 +174,7 @@ function acceptFriendRequest(myId, friendId, callback) {
     });
 }
 
-function rejectFriendRequest(myId, friendId, callback) {
+function cancelFriendRequest(myId, friendId, callback) {
     $.ajax({
         url: `${SERVER_URL}/api/user/cancel-request/${myId}/${friendId}`,
         type: 'GET',
@@ -193,21 +208,25 @@ function deleteFriend(myId, friendId, callback) {
 function init() {
     renderNavbar();
 
-    getAllRequests(userId, (response) => {
-        for (let i = 0; i < response.length; i++) {
-            requests[i] = response[i];
+    getAllRequests(userId, (response1) => {
+        if (response1.length > 0) {
+            for (let i = 0; i < response1.length; i++) {
+                requests[i] = response1[i];
+            }
         }
 
         getAllFriends(userId, (response) => {
-            for (let i = 0; i < response.length; i++) {
-                friends[i] = response[i];
-            }
-            renderFriendsPage()
+           if (response.length > 0) {
+               for (let i = 0; i < response.length; i++) {
+                   friends[i] = response[i];
+               }
+           }
+            renderFriendsPage();
+           console.log(requests);
+           console.log(friends);
         })
 
     })
-
-
 }
 
 $( () => {

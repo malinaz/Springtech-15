@@ -90,7 +90,6 @@ function setPostEvents() {
   $('.post-like-btn').on('click', function(event) {
     const postIndex = $(event.target).parent().parent().index();
     const postItem = posts[postIndex];
-
     if (activeUser.likedPosts.includes(postItem._id)) {
       postItem.likes--;
       activeUser.likedPosts = activeUser.likedPosts.filter(postId => postId != postItem._id);

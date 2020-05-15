@@ -129,7 +129,7 @@ const userManager = {
                                      break;
                                  }
                              }
-                             console.log(pos);
+
                              if(pos!=-1)
                              {
                                 
@@ -138,7 +138,7 @@ const userManager = {
                                   me._id,
                                   me,
                                   (updatedMe)=>{
-                                      
+                                      console.log(pos);
                                       success(updatedMe)
                                   },
                                   (error)=>{
